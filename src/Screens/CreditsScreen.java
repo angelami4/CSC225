@@ -16,6 +16,10 @@ public class CreditsScreen extends Screen {
     protected KeyLocker keyLocker = new KeyLocker();
     protected SpriteFont creditsLabel;
     protected SpriteFont createdByLabel;
+    protected SpriteFont coleLabel;
+    protected SpriteFont angelaLabel;
+    protected SpriteFont javiLabel;
+    protected SpriteFont aidanLabel;
     protected SpriteFont returnInstructionsLabel;
 
     public CreditsScreen(ScreenCoordinator screenCoordinator) {
@@ -27,8 +31,12 @@ public class CreditsScreen extends Screen {
         // setup graphics on screen (background map, spritefont text)
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
-        creditsLabel = new SpriteFont("Credits", 15, 7, "Times New Roman", 30, Color.white);
-        createdByLabel = new SpriteFont("Created by Alex Thimineur", 130, 121, "Times New Roman", 20, Color.white);
+        creditsLabel = new SpriteFont("CREDITS", 15, 7, "Impact", 30, Color.white);
+        createdByLabel = new SpriteFont("CREATORS:", 150, 121, "Segoe UI", 20, Color.white);
+        coleLabel =  new SpriteFont("Cole Davignon", 150, 151, "Segoe UI", 20, Color.white);
+        angelaLabel =  new SpriteFont("Angela Bruno", 150, 181, "Segoe UI", 20, Color.white);
+        aidanLabel =  new SpriteFont("Aidan Armellino", 150, 211, "Segoe UI", 20, Color.white);
+        javiLabel =  new SpriteFont("Javi Reyes", 150, 241, "Segoe UI", 20, Color.white);
         returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 532, "Times New Roman", 30, Color.white);
         keyLocker.lockKey(Key.SPACE);
     }
@@ -50,6 +58,10 @@ public class CreditsScreen extends Screen {
         background.draw(graphicsHandler);
         creditsLabel.draw(graphicsHandler);
         createdByLabel.draw(graphicsHandler);
+        coleLabel.draw(graphicsHandler);
+        angelaLabel.draw(graphicsHandler);
+        aidanLabel.draw(graphicsHandler);
+        javiLabel.draw(graphicsHandler);
         returnInstructionsLabel.draw(graphicsHandler);
     }
 }
