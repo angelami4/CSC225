@@ -17,6 +17,7 @@ public class MenuScreen extends Screen {
     protected SpriteFont title;
     protected SpriteFont playGame;
     protected SpriteFont credits;
+    protected SpriteFont info;
     protected Map background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
@@ -37,6 +38,9 @@ public class MenuScreen extends Screen {
         title = new SpriteFont("THE ROAD TO VICTORY", 100, 40, "Impact", 60, new Color(200, 0, 0));
         title.setOutlineColor(Color.black);
         title.setOutlineThickness(3);
+        info = new SpriteFont("Use Enter Key for Selections", 30, 540, "Trebuchet MS", 20, new Color(200, 0, 200));
+        info.setOutlineColor(Color.black);
+        info.setOutlineThickness(2);
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
         keyPressTimer = 0;
@@ -100,6 +104,7 @@ public class MenuScreen extends Screen {
         playGame.draw(graphicsHandler);
         credits.draw(graphicsHandler);
         title.draw(graphicsHandler);
+        info.draw(graphicsHandler);
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(252, 207, 7), Color.black, 2);
     }
 }
