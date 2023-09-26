@@ -9,8 +9,8 @@ public class LostBallScript extends Script {
     protected void setup() {
         lockPlayer();
         showTextbox();
-        addTextToTextboxQueue("Where did my ball go!?");
-        addTextToTextboxQueue("I left it right here before I took my 22 hour cat nap.");
+        addTextToTextboxQueue("Do you have my ball!!");
+        addTextToTextboxQueue("I GAVE IT TO YOU LAST!");
         addTextToTextboxQueue("Maybe Walrus has seen it.");
     }
 
