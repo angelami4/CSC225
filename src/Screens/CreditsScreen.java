@@ -46,7 +46,7 @@ public class CreditsScreen extends Screen {
         aidanLabel =  new SpriteFont("Aidan Armellino", 150, 211, "Segoe UI", 20, Color.white);
         aidanLabel.setOutlineColor(Color.black);
         aidanLabel.setOutlineThickness(3);
-        javiLabel =  new SpriteFont("Javi Reyes", 150, 241, "Segoe UI", 20, Color.white);
+        javiLabel =  new SpriteFont("Javi Flores", 150, 241, "Segoe UI", 20, Color.white);
         javiLabel.setOutlineColor(Color.black);
         javiLabel.setOutlineThickness(3);
         returnInstructionsLabel = new SpriteFont("Press Left Arrow to return to the menu", 20, 532, "Times New Roman", 30, Color.white);
