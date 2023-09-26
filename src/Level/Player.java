@@ -40,6 +40,7 @@ public abstract class Player extends GameObject {
     protected Key MOVE_UP_KEY = Key.UP;
     protected Key MOVE_DOWN_KEY = Key.DOWN;
     protected Key INTERACT_KEY = Key.SPACE;
+    protected Key SPRINT_KEY = Key.S;
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -152,6 +153,16 @@ public abstract class Player extends GameObject {
 
         if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
             playerState = PlayerState.STANDING;
+        }
+
+        if (Keyboard.isKeyDown(SPRINT_KEY))
+        {
+            walkSpeed = 7.3f;
+        }
+
+        if (Keyboard.isKeyUp(SPRINT_KEY))
+        {
+            walkSpeed = 2.3f;
         }
     }
 
