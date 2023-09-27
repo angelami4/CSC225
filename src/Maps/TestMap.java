@@ -6,6 +6,8 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
+import NPCs.Enemy1;
+import NPCs.Enemy2;
 import NPCs.Walrus;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
@@ -41,6 +43,14 @@ public class TestMap extends Map {
         Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
+
+        Enemy1 enemy1 = new Enemy1(1, getMapTile(10, 18).getLocation().subtractY(40));
+        walrus.setInteractScript(new WalrusScript());
+        npcs.add(enemy1);
+
+        Enemy2 enemy2 = new Enemy2(1, getMapTile(10, 20).getLocation().subtractY(40));
+        walrus.setInteractScript(new WalrusScript());
+        npcs.add(enemy2);
 
         Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
         dinosaur.setExistenceFlag("hasTalkedToDinosaur");
