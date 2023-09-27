@@ -12,10 +12,8 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-// This class is for the walrus NPC
-public class Walrus extends NPC {
-
-    public Walrus(int id, Point location) {
+public class Enemy1 extends NPC {
+    public Enemy1(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Walrus.png"), 24, 24), "STAND_LEFT");
     }
 
@@ -47,3 +45,4 @@ public class Walrus extends NPC {
         super.draw(graphicsHandler);
     }
 }
+
