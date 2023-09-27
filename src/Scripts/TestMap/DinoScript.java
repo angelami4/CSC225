@@ -21,6 +21,7 @@ public class DinoScript extends Script<NPC> {
         if (!isFlagSet("hasTalkedToWalrus")) {
             showTextbox();
             addTextToTextboxQueue("Isn't my garden so lovely?");
+            addTextToTextboxQueue("Get toO close and my plant will EAT YOU!!!");
         }
         else if (isFlagSet("hasTalkedToWalrus") && !isFlagSet("hasTalkedToDinosaur")) {
             if (sequence == 0) {
