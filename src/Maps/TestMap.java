@@ -10,6 +10,7 @@ import NPCs.Dinosaur;
 import NPCs.Enemy1;
 import NPCs.Enemy2;
 import NPCs.Walrus;
+import NPCs.TrophyNPC;
 import Scripts.TestMap.TrophyScript;
 import Scripts.TestMap.Enemy1Script;
 import Scripts.SimpleTextScript;

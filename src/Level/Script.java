@@ -59,6 +59,7 @@ public abstract class Script<T extends MapEntity> {
         if (scriptState == ScriptState.COMPLETED) {
             this.isActive = false;
             map.setActiveInteractScript(null);
+            talking.pause();
         }
     }
 
