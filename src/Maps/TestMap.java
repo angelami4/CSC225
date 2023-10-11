@@ -44,15 +44,15 @@ public class TestMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
+        Walrus walrus = new Walrus(1, getMapTile(4, 20).getLocation().subtractY(40));
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
 
-        Enemy1 enemy1 = new Enemy1(1, getMapTile(10, 18).getLocation().subtractY(40));
+        Enemy1 enemy1 = new Enemy1(1, getMapTile(13, 14).getLocation().subtractY(40));
         walrus.setInteractScript(new WalrusScript());
         npcs.add(enemy1);
 
-        Enemy2 enemy2 = new Enemy2(1, getMapTile(10, 20).getLocation().subtractY(40));
+        Enemy2 enemy2 = new Enemy2(1, getMapTile(21, 26).getLocation().subtractY(40));
         walrus.setInteractScript(new WalrusScript());
         npcs.add(enemy2);
 
