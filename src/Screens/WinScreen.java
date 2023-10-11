@@ -31,7 +31,7 @@ public class WinScreen extends Screen {
         keyLocker.lockKey(Key.SPACE);
 
         
-        keyLocker.lockKey(Key.ESC);
+        keyLocker.lockKey(Key.SPACE);
     }
 
     @Override
@@ -39,14 +39,14 @@ public class WinScreen extends Screen {
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
         }
-        if (Keyboard.isKeyUp(Key.ESC)) {
-            keyLocker.unlockKey(Key.ESC);
+        if (Keyboard.isKeyUp(Key.SPACE)) {
+            keyLocker.unlockKey(Key.SPACE);
         }
 
         // if space is pressed, reset level. if escape is pressed, go back to main menu
         if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
             playLevelScreen.resetLevel();
-        } else if (Keyboard.isKeyDown(Key.ESC) && !keyLocker.isKeyLocked(Key.ESC)) {
+        } else if (Keyboard.isKeyDown(Key.ESC) && !keyLocker.isKeyLocked(Key.SPACE)) {
             playLevelScreen.goBackToMenu();
         }
     }
