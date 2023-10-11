@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class CommonTileset extends Tileset {
 
     public CommonTileset() {
-        super(ImageLoader.load("CommonTileset.png"), 16, 16, 3);
+        super(ImageLoader.load("CommonTileset2.png"), 16, 16, 3);
     }
 
     @Override
@@ -66,32 +66,30 @@ public class CommonTileset extends Tileset {
 
         MapTileBuilder treeTrunkWithFullHoleTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(treeTrunkWithFullHoleFrame)
-                .withTileType(TileType.PASSABLE);
+                .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(treeTrunkWithFullHoleTile);
 
         // left end branch
         Frame leftEndBranchFrame = new FrameBuilder(getSubImage(2, 4))
                 .withScale(tileScale)
-                .withBounds(0, 6, 16, 4)
                 .build();
 
         MapTileBuilder leftEndBranchTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(leftEndBranchFrame)
-                .withTileType(TileType.PASSABLE);
+                .withTileType(TileType.NOT_PASSABLE); 
 
         mapTiles.add(leftEndBranchTile);
 
         // right end branch
         Frame rightEndBranchFrame = new FrameBuilder(getSubImage(2, 4))
                 .withScale(tileScale)
-                .withBounds(0, 6, 16, 4)
                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                 .build();
 
         MapTileBuilder rightEndBranchTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(rightEndBranchFrame)
-                .withTileType(TileType.PASSABLE);
+                .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(rightEndBranchTile);
         
@@ -102,7 +100,7 @@ public class CommonTileset extends Tileset {
 
         MapTileBuilder treeTrunkTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(treeTrunkFrame)
-                .withTileType(TileType.PASSABLE);
+                .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(treeTrunkTile);
 
@@ -113,7 +111,7 @@ public class CommonTileset extends Tileset {
 
         MapTileBuilder treeTopLeavesTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(treeTopLeavesFrame)
-                .withTileType(TileType.PASSABLE);
+                .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(treeTopLeavesTile);
         
@@ -160,12 +158,11 @@ public class CommonTileset extends Tileset {
         // middle branch
         Frame middleBranchFrame = new FrameBuilder(getSubImage(2, 3))
                 .withScale(tileScale)
-                .withBounds(0, 6, 16, 4)
                 .build();
 
         MapTileBuilder middleBranchTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(middleBranchFrame)
-                .withTileType(TileType.PASSABLE);
+                .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(middleBranchTile);
 
