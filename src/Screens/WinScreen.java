@@ -1,6 +1,7 @@
 package Screens;
 
 import Engine.*;
+import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
@@ -8,9 +9,13 @@ import java.awt.*;
 // This class is for the win level screen
 public class WinScreen extends Screen {
     protected SpriteFont winMessage;
+    protected SpriteFont playerHP;
+    protected SpriteFont enemyHP;
     protected SpriteFont instructions;
     protected KeyLocker keyLocker = new KeyLocker();
     protected PlayLevelScreen playLevelScreen;
+    protected Rectangle rectangle;
+    protected GraphicsHandler graphicsHandler;
 
     public WinScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
@@ -19,9 +24,13 @@ public class WinScreen extends Screen {
 
     @Override
     public void initialize() {
-        winMessage = new SpriteFont("You win!", 350, 239, "Comic Sans", 30, Color.white);
-        instructions = new SpriteFont("Press Space to play again or Escape to go back to the main menu", 120, 279,"Comic Sans", 20, Color.white);
+        winMessage = new SpriteFont("FIGHT!", 300, 200, "Trebuchet MS", 60, Color.black);
+        playerHP = new SpriteFont("BOBCAT|100HP", 15,15, "Trebuchet MS", 22, Color.black);
+        enemyHP = new SpriteFont("ENEMY|150HP", 625,15, "Trebuchet MS", 22, Color.black);
+        rectangle = new Rectangle();
         keyLocker.lockKey(Key.SPACE);
+
+        
         keyLocker.lockKey(Key.ESC);
     }
 
@@ -43,8 +52,10 @@ public class WinScreen extends Screen {
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.black);
+       graphicsHandler.drawFilledRectangle(0, 420, 450, 160, Color.black);
+        graphicsHandler.drawFilledRectangle(500, 420, 400, 160, Color.black);
         winMessage.draw(graphicsHandler);
-        instructions.draw(graphicsHandler);
+        playerHP.draw(graphicsHandler);
+        enemyHP.draw(graphicsHandler);
     }
 }

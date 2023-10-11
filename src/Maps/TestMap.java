@@ -9,12 +9,16 @@ import NPCs.Dinosaur;
 import NPCs.Enemy1;
 import NPCs.Enemy2;
 import NPCs.Walrus;
+import Scripts.TestMap.Enemy1Script;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
+import Game.ScreenCoordinator;
+
+
 
 import java.util.ArrayList;
 
@@ -24,6 +28,7 @@ public class TestMap extends Map {
     public TestMap() {
         super("test_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(17, 20).getLocation();
+        
     }
 
     @Override
@@ -44,12 +49,15 @@ public class TestMap extends Map {
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
 
+      
+        
+
         Enemy1 enemy1 = new Enemy1(1, getMapTile(10, 18).getLocation().subtractY(40));
-        walrus.setInteractScript(new WalrusScript());
+        enemy1.setInteractScript(new Enemy1Script());
         npcs.add(enemy1);
 
         Enemy2 enemy2 = new Enemy2(1, getMapTile(10, 20).getLocation().subtractY(40));
-        walrus.setInteractScript(new WalrusScript());
+        enemy2.setInteractScript(new DinoScript());
         npcs.add(enemy2);
 
         Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
