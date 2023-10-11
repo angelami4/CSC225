@@ -31,6 +31,8 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToDinosaur", false);
         flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasTouchedTrophy", false);
+        flagManager.addFlag("hasTalkedToEnemy1", false);
+
 
         // define/setup map
         this.map = new TestMap();
@@ -102,6 +104,10 @@ public class PlayLevelScreen extends Screen {
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
+
+         if (map.getFlagManager().isFlagSet("hasTalkedToWalrus")) {
+            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -131,6 +137,6 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED
+        RUNNING, LEVEL_COMPLETED,
     }
 }

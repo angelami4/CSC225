@@ -2,6 +2,7 @@ package Game;
 
 import Engine.GameWindow;
 import Engine.ScreenManager;
+import Utils.Sound;
 
 /*
  * The game starts here

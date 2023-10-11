@@ -1,6 +1,7 @@
 package Level;
 import GameObject.Rectangle;
 import Utils.Direction;
+import Utils.Sound;
 
 // This class is a base class for all scripts in the game -- all scripts should extend from it
 // Scripts can be used to interact with map entities
@@ -45,10 +46,11 @@ public abstract class Script<T extends MapEntity> {
     // if script is still running, it should return the RUNNING Script State
     protected abstract ScriptState execute();
 
+    Sound talking = new Sound("talking.wav", true);
+
     public void update() {
         // Runs an execute cycle of the Script
         ScriptState scriptState = execute();
-
         if (frameDelayCounter > 0) {
             frameDelayCounter--;
         }
@@ -64,6 +66,7 @@ public abstract class Script<T extends MapEntity> {
     protected void start() {
         if (start) {
             setup();
+            talking.play();
             start = false;
         }
     }
@@ -96,17 +99,21 @@ public abstract class Script<T extends MapEntity> {
     // textbox is shown on screen
     protected void showTextbox() {
         map.getTextbox().setIsActive(true);
+        talking.play();
     }
 
     // adds text to be shown in textbox
     protected void addTextToTextboxQueue(String text) {
         map.getTextbox().addText(text);
+        talking.play();
     }
 
     // adds a series of text to be shown in textbox
     protected void addTextToTextboxQueue(String[] text) {
         map.getTextbox().addText(text);
+        talking.play();
     }
+    
 
     // checks if textbox has already shown all text in its queue
     protected boolean isTextboxQueueEmpty() {
@@ -116,6 +123,7 @@ public abstract class Script<T extends MapEntity> {
     // remove textbox from screen
     protected void hideTextbox() {
         map.getTextbox().setIsActive(false);
+        talking.pause();
     }
 
     // gets an npc instance by its id value

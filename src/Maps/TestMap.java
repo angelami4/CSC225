@@ -9,16 +9,16 @@ import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Enemy1;
 import NPCs.Enemy2;
-import NPCs.TrophyNPC;
 import NPCs.Walrus;
-import Items.Trophy;
 import Scripts.TestMap.TrophyScript;
+import Scripts.TestMap.Enemy1Script;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
+import Utils.Sound;
 
 import java.util.ArrayList;
 
@@ -28,6 +28,8 @@ public class TestMap extends Map {
     public TestMap() {
         super("test_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(17, 20).getLocation();
+        Sound background = new Sound("ruins.wav", true);
+        background.play();
     }
 
     @Override
@@ -44,7 +46,7 @@ public class TestMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
+        Walrus walrus = new Walrus(1, getMapTile(4, 20).getLocation().subtractY(40));
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
 

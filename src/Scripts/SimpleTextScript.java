@@ -2,6 +2,7 @@ package Scripts;
 
 import Level.Script;
 import Level.ScriptState;
+import Utils.Sound;
 
 // Reusable simple interact script
 // Just shows text upon interacting with the associated entity
@@ -33,7 +34,6 @@ public class SimpleTextScript extends Script {
     public ScriptState execute() {
         // call setup code
         start();
-
         // while textbox is not finished displaying all text, script keeps running
         if (!isTextboxQueueEmpty()) {
             return ScriptState.RUNNING;
