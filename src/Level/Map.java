@@ -394,6 +394,8 @@ public abstract class Map{
         for (MapEntity mapEntity : surroundingMapEntities) {
             if (mapEntity.getInteractScript() != null && mapEntity.intersects(player.getInteractionRange())) {
                 playerTouchingMapEntities.add(mapEntity);
+                // Sound talking = new Sound("talking.wav", false);
+                // talking.play();
             }
         }
         MapEntity interactedEntity = null;

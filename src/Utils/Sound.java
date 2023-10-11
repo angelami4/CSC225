@@ -67,6 +67,14 @@ public class Sound implements LineListener {
         }
     }
 
+    public void playOnce()
+    {
+        if(audioClip != null)
+        {
+            audioClip.start();
+        }
+    }
+
     /**
      * Pauses the audio
      */

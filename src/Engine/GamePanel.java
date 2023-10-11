@@ -3,6 +3,7 @@ package Engine;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
+import Utils.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -122,6 +123,8 @@ public class GamePanel extends JPanel {
 		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
 			isGamePaused = !isGamePaused;
 			keyLocker.lockKey(pauseKey);
+			Sound pause = new Sound("pause.wav", false);
+			pause.playOnce();
 		}
 
 		if (Keyboard.isKeyUp(pauseKey)) {
