@@ -10,9 +10,15 @@ import Engine.ScreenManager;
  */
 public class Game { 
 
+// //<<<<<<< HEAD
+//     public static void main(String[] args) {
+//         new Game();
+//     }
+//=======
     public static void main(String[] args) { 
-        new Game();       
+        new Game();
     } 
+//>>>>>>> 67c173535dc89f766778e4bd62c3298b38fee1e2
 
     public Game() {
         GameWindow gameWindow = new GameWindow(); 
