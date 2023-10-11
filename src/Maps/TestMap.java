@@ -4,11 +4,15 @@ import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
+import Level.Item;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Enemy1;
 import NPCs.Enemy2;
+import NPCs.TrophyNPC;
 import NPCs.Walrus;
+import Items.Trophy;
+import Scripts.TestMap.TrophyScript;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
@@ -57,8 +61,27 @@ public class TestMap extends Map {
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur);
 
+        TrophyNPC trophynpc = new TrophyNPC(1, getMapTile(13, 17).getLocation());
+        trophynpc.setExistenceFlag("hasTouchedTrophy");
+        trophynpc.setInteractScript(new TrophyScript());
+        npcs.add(trophynpc);
+
         return npcs;
     }
+
+   /* @Override
+    public ArrayList<Item> loadItems() 
+    {
+        ArrayList<Item> items = new ArrayList<>();
+
+        Trophy trophy = new Trophy(1, getMapTile(13, 17).getLocation());
+        trophy.setExistenceFlag("hasTouchedTrophy");
+        trophy.setInteractScript(new TrophyScript());
+        items.add(trophy);
+        
+        return items;
+    }
+    */
 
     @Override
     public ArrayList<Trigger> loadTriggers() {

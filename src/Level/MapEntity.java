@@ -35,6 +35,11 @@ public class MapEntity extends GameObject {
         super(x, y, animations, startingAnimation);
     }
 
+    public MapEntity(float x, float y, SpriteSheet spriteSheet)
+    {
+        super(spriteSheet, x, y);
+    }
+
     public MapEntity(float x, float y, Frame[] frames) {
         super(x, y, frames);
     }

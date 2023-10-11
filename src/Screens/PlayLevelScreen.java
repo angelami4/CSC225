@@ -30,6 +30,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToWalrus", false);
         flagManager.addFlag("hasTalkedToDinosaur", false);
         flagManager.addFlag("hasFoundBall", false);
+        flagManager.addFlag("hasTouchedTrophy", false);
 
         // define/setup map
         this.map = new TestMap();
@@ -57,6 +58,14 @@ public class PlayLevelScreen extends Screen {
             if (npc.getInteractScript() != null) {
                 npc.getInteractScript().setMap(map);
                 npc.getInteractScript().setPlayer(player);
+            }
+        }
+        for (Item item : map.getItems())
+        {
+            if (item.getInteractScript() != null)
+            {
+                item.getInteractScript().setMap(map);
+                item.getInteractScript().setPlayer(player);
             }
         }
         for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {

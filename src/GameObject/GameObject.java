@@ -76,6 +76,11 @@ public class GameObject extends AnimatedSprite {
 		this.previousY = y;
 	}
 
+	public GameObject(SpriteSheet spriteSheet, float x, float y)
+	{
+		super(spriteSheet, x, y);
+	}
+
 	public boolean isAffectedByTriggers() {
 		return affectedByTriggers;
 	}

@@ -57,6 +57,7 @@ public abstract class Map {
     protected ArrayList<EnhancedMapTile> enhancedMapTiles;
     protected ArrayList<NPC> npcs;
     protected ArrayList<Trigger> triggers;
+    protected ArrayList<Item> items;
 
     protected Script activeInteractScript;
 
@@ -101,6 +102,11 @@ public abstract class Map {
         this.npcs = loadNPCs();
         for (NPC npc: this.npcs) {
             npc.setMap(this);
+        }
+
+        this.items = loadItems();
+        for (Item item: this.items) {
+            item.setMap(this);
         }
 
         this.triggers = loadTriggers();
@@ -283,6 +289,10 @@ public abstract class Map {
         return new ArrayList<>();
     }
 
+    protected ArrayList<Item> loadItems() {
+        return new ArrayList<>();
+    }
+
     protected ArrayList<Trigger> loadTriggers() {
         return new ArrayList<>();
     }
@@ -297,6 +307,10 @@ public abstract class Map {
 
     public ArrayList<NPC> getNPCs() {
         return npcs;
+    }
+
+    public ArrayList <Item> getItems() {
+        return items;
     }
     public ArrayList<Trigger> getTriggers() { return triggers; }
 
@@ -322,6 +336,15 @@ public abstract class Map {
         return null;
     }
 
+    public Item getItemById(int id) {
+        for (Item item : items) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     // returns all active enhanced map tiles (enhanced map tiles that are a part of the current update cycle) -- this changes every frame by the Camera class
     public ArrayList<EnhancedMapTile> getActiveEnhancedMapTiles() {
         return camera.getActiveEnhancedMapTiles();
@@ -330,6 +353,10 @@ public abstract class Map {
     // returns all active npcs (npcs that are a part of the current update cycle) -- this changes every frame by the Camera class
     public ArrayList<NPC> getActiveNPCs() {
         return camera.getActiveNPCs();
+    }
+
+    public ArrayList<Item> getActiveItems() {
+        return camera.getAvtiveItems();
     }
 
     public ArrayList<Trigger> getActiveTriggers() {
@@ -346,6 +373,11 @@ public abstract class Map {
     public void addNPC(NPC npc) {
         npc.setMap(this);
         this.npcs.add(npc);
+    }
+
+    public void addItem(Item item) {
+        item.setMap(this);
+        this.items.add(item);
     }
 
     // add a trigger to the map's list of triggers
