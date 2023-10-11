@@ -21,13 +21,30 @@ public class GamePanel extends JPanel {
 	private boolean isGamePaused = false;
 	private SpriteFont pauseLabel;
 	private KeyLocker keyLocker = new KeyLocker();
-	private final Key pauseKey = Key.P;
+	private final Key pauseKey = Key.ESC;
 	private Thread gameLoopProcess;
 
 	private Key showFPSKey = Key.G;
 	private SpriteFont fpsDisplayLabel;
 	private boolean showFPS = false;
 	private int currentFPS;
+
+	private SpriteFont healthLabel;
+	private SpriteFont attackTitle;
+	private SpriteFont itemTitle; 
+	private SpriteFont dmgBoost1;
+	private SpriteFont dmgBoost2;
+	private SpriteFont dmgBoost3;
+	private SpriteFont item1;
+	private SpriteFont item2;
+	private SpriteFont item3;
+	private SpriteFont bobcatLabel;
+	private SpriteFont levelNumber;
+	private SpriteFont trophyLabel;
+	private SpriteFont itemLabel;
+	private SpriteFont attackListLabel;
+	private SpriteFont infoLabel;
+	
 
 	// The JPanel and various important class instances are setup here
 	public GamePanel() {
@@ -41,10 +58,27 @@ public class GamePanel extends JPanel {
 
 		screenManager = new ScreenManager();
 
-		pauseLabel = new SpriteFont("PAUSE", 365, 280, "Comic Sans", 24, Color.white);
+		pauseLabel = new SpriteFont("MENU", 10, 10, "Trebuchet MS", 24, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
 
+		attackTitle = new SpriteFont("ATTACK BOOST", 30, 280, "Trebuchet MS", 24, Color.white);
+		dmgBoost1 = new SpriteFont("- Boxing Gloves", 30, 320, "Trebuchet MS", 20, Color.white);
+		dmgBoost2 = new SpriteFont("- Hockey Stick", 30, 350, "Trebuchet MS", 20, Color.white);
+		dmgBoost3 = new SpriteFont("- Scratching Post", 30, 380, "Trebuchet MS", 20, Color.white);
+
+		itemTitle = new SpriteFont("ITEMS", 220, 65, "Trebuchet MS", 24, Color.white);
+		item1 = new SpriteFont(" 1. Pepsi (5 HP)", 220, 95, "Trebuchet MS", 24, Color.white);
+		item2 = new SpriteFont(" 2. Hot Dog (10 HP)", 220, 125, "Trebuchet MS", 24, Color.white);
+		item3 = new SpriteFont(" 3. Nachos (20 HP)", 220, 155, "Trebuchet MS", 24, Color.white);
+
+		bobcatLabel = new SpriteFont("Boomer", 30, 65, "Trebuchet MS", 24, Color.white);
+		levelNumber = new SpriteFont("LV 1", 30, 105, "Trebuchet MS", 16, Color.white);
+		healthLabel = new SpriteFont("100/100 HP", 30, 125, "Trebuchet MS", 16, Color.white);
+		trophyLabel = new SpriteFont("TROPHIES: 0", 30, 145, "Trebuchet MS", 16, Color.white);
+		itemLabel = new SpriteFont("    ITEMS", 30, 185, "Trebuchet MS", 16, Color.white);
+		attackListLabel = new SpriteFont("    ATTACK LIST", 30, 205, "Trebuchet MS", 16, Color.white);
+		infoLabel = new SpriteFont("Press the number keys to use the item. ", 220, 370, "Trebuchet MS", 21, Color.white);
 		fpsDisplayLabel = new SpriteFont("FPS", 4, 3, "Comic Sans", 12, Color.black);
 
 		currentFPS = Config.TARGET_FPS;
@@ -113,8 +147,27 @@ public class GamePanel extends JPanel {
 
 		// if game is paused, draw pause gfx over Screen gfx
 		if (isGamePaused) {
-			pauseLabel.draw(graphicsHandler);
+			graphicsHandler.drawFilledRectangleWithBorder(20, 50, 180, 210, Color.black, Color.white, 3);
+			graphicsHandler.drawFilledRectangleWithBorder(20, 270, 180, 250, Color.black, Color.white, 3);
+			graphicsHandler.drawFilledRectangleWithBorder(210, 50,400, 300, Color.black, Color.white, 3);
+			graphicsHandler.drawFilledRectangleWithBorder(210, 360, 400, 160, Color.black, Color.white, 3);
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
+			pauseLabel.draw(graphicsHandler);
+			healthLabel.draw(graphicsHandler);
+			attackTitle.draw(graphicsHandler);
+			itemTitle.draw(graphicsHandler);
+			dmgBoost1.draw(graphicsHandler);
+			dmgBoost2.draw(graphicsHandler);
+			dmgBoost3.draw(graphicsHandler);
+			item1.draw(graphicsHandler);
+			item2.draw(graphicsHandler);
+			item3.draw(graphicsHandler);
+			bobcatLabel.draw(graphicsHandler);
+			levelNumber.draw(graphicsHandler);
+			trophyLabel.draw(graphicsHandler);
+			itemLabel.draw(graphicsHandler);
+			attackListLabel.draw(graphicsHandler);
+			infoLabel.draw(graphicsHandler);
 		}
 
 		if (showFPS) {

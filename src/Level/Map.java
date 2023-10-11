@@ -6,13 +6,16 @@ import Engine.ScreenManager;
 import GameObject.Rectangle;
 import Utils.Direction;
 import Utils.Point;
+import Utils.Sound;
 
+import java.applet.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+//import Level.Audio;
 
 /*
     This class is for defining a map that is used for a specific level
@@ -24,7 +27,7 @@ import java.util.Scanner;
     5. calculating which tile a game object is currently on based on its x and y location
 */
 
-public abstract class Map {
+public abstract class Map{
     // the tile map (map tiles that make up the entire map image)
     protected MapTile[] mapTiles;
 
@@ -82,7 +85,7 @@ public abstract class Map {
         this.endBoundY = height * tileset.getScaledSpriteHeight();
         this.xMidPoint = ScreenManager.getScreenWidth() / 2;
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
-        this.playerStartPosition = new Point(0, 0);
+        this.playerStartPosition = new Point(0, 0); 
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -290,6 +293,13 @@ public abstract class Map {
     public Camera getCamera() {
         return camera;
     }
+
+    // public Sound playBackground(Sound s)
+    // {
+    //     Sound background = s;
+    //     playBackgroundMusic(background);
+    //     return s;
+    // }
 
     public ArrayList<EnhancedMapTile> getEnhancedMapTiles() {
         return enhancedMapTiles;
