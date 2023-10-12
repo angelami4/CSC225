@@ -20,7 +20,7 @@ public class PlayLevelScreen extends Screen {
     protected WinScreen winScreen;
     protected FlagManager flagManager;
     Sound background = new Sound("ruins.wav", true);
-
+    Sound fightStart = new Sound("fight!.wav", false);
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -102,6 +102,7 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_COMPLETED:
                 winScreen.update();
                 background.pause();
+                fightStart.play();
                 break;
         }
 
