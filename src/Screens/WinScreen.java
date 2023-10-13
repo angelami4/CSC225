@@ -11,6 +11,7 @@ import java.awt.*;
 // This class is for the win level screen
 public class WinScreen extends Screen {
     protected SpriteFont winMessage;
+    protected SpriteFont poopMessage;
     protected SpriteFont playerHP;
     protected SpriteFont enemyHP;
     protected SpriteFont instructions;
@@ -27,6 +28,8 @@ public class WinScreen extends Screen {
     @Override
     public void initialize() {
         winMessage = new SpriteFont("u win I guess ", 300, 200, "Trebuchet MS", 60, Color.black);
+        poopMessage = new SpriteFont("Press Escape To go To main Menu, Press space to reset ", 300, 200, "Trebuchet MS", 60, Color.black);
+        
   
      
         keyLocker.lockKey(Key.SPACE);
@@ -55,6 +58,7 @@ public class WinScreen extends Screen {
     public void draw(GraphicsHandler graphicsHandler) {
     
         winMessage.draw(graphicsHandler);
+        poopMessage.draw(graphicsHandler);
  
     }
 }
