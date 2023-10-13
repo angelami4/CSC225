@@ -18,6 +18,7 @@ public class PlayLevelScreen extends Screen {
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
+    protected BattleScreen battleScreen;
     protected FlagManager flagManager;
     Sound background = new Sound("ruins.wav", true);
     Sound fightStart = new Sound("fight!.wav", false);
@@ -36,7 +37,9 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTouchedTrophy", false);
         flagManager.addFlag("hasTalkedToEnemy1", false);
         background.play();
-
+        battleScreen = new BattleScreen(this); 
+        
+    
         // define/setup map
         this.map = new TestMap();
         map.setFlagManager(flagManager);
@@ -102,6 +105,10 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_COMPLETED:
                 winScreen.update();
                 background.pause();
+                break;
+              case BATTLE_ACTIVATE:
+                battleScreen.update();
+                background.pause();
                 fightStart.play();
                 break;
         }
@@ -112,7 +119,7 @@ public class PlayLevelScreen extends Screen {
         }
 
          if (map.getFlagManager().isFlagSet("hasTalkedToWalrus")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+            playLevelScreenState = PlayLevelScreenState.BATTLE_ACTIVATE;
         }
     }
 
@@ -124,6 +131,9 @@ public class PlayLevelScreen extends Screen {
                 break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
+                break;
+              case BATTLE_ACTIVATE:
+                battleScreen.draw(graphicsHandler);
                 break;
         }
     }
@@ -143,6 +153,6 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED,
+        RUNNING, LEVEL_COMPLETED, BATTLE_ACTIVATE
     }
 }

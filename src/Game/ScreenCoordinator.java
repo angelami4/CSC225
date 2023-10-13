@@ -5,6 +5,7 @@ import Engine.GraphicsHandler;
 import Engine.Screen;
 import Screens.CreditsScreen;
 import Screens.MenuScreen;
+import Screens.BattleScreen;
 import Screens.PlayLevelScreen;
 import Game.ScreenCoordinator;
 /*
@@ -49,6 +50,8 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);
+					case BATTLE:
+						currentScreen = new BattleScreen(this);
 						break;
 				}
 				currentScreen.initialize();
