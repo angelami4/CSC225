@@ -37,7 +37,8 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTouchedTrophy", false);
         flagManager.addFlag("hasTalkedToEnemy1", false);
         background.play();
-        battleScreen = new BattleScreen(this); 
+        battleScreen = new BattleScreen(this.screenCoordinator);
+
         
     
         // define/setup map
