@@ -17,6 +17,7 @@ public class TileBuilder extends JPanel {
     private GraphicsHandler graphicsHandler = new GraphicsHandler();
     private JLabel hoveredTileIndexLabel;
     private boolean showNPCs;
+    private boolean showItems;
     private boolean showEnhancedMapTiles;
     private boolean showTriggers;
 
@@ -83,6 +84,12 @@ public class TileBuilder extends JPanel {
         if (showNPCs) {
             for (NPC npc : map.getNPCs()) {
                 npc.draw(graphicsHandler);
+            }
+        }
+
+        if (showItems) {
+            for (Item item : map.getItems()) {
+                item.draw(graphicsHandler);
             }
         }
 
@@ -163,6 +170,15 @@ public class TileBuilder extends JPanel {
 
     public void setShowNPCs(boolean showNPCs) {
         this.showNPCs = showNPCs;
+        repaint();
+    }
+
+    public boolean getShowItems() {
+        return showItems;
+    }
+
+    public void setShowItems(boolean showItems) {
+        this.showItems = showItems;
         repaint();
     }
 

@@ -10,7 +10,8 @@ import NPCs.Dinosaur;
 import NPCs.Enemy1;
 import NPCs.Enemy2;
 import NPCs.Walrus;
-import NPCs.TrophyNPC;
+//import NPCs.TrophyNPC;
+import Items.*;
 import Scripts.TestMap.TrophyScript;
 import Scripts.TestMap.Enemy1Script;
 import Scripts.SimpleTextScript;
@@ -62,27 +63,34 @@ public class TestMap extends Map {
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur);
 
-        TrophyNPC trophynpc = new TrophyNPC(1, getMapTile(13, 17).getLocation());
-        trophynpc.setExistenceFlag("hasTouchedTrophy");
-        trophynpc.setInteractScript(new TrophyScript());
-        npcs.add(trophynpc);
+        //TrophyNPC trophynpc = new TrophyNPC(1, getMapTile(13, 17).getLocation());
+        //trophynpc.setExistenceFlag("hasTouchedTrophy");
+        //trophynpc.setInteractScript(new TrophyScript());
+        //npcs.add(trophynpc);
 
         return npcs;
     }
 
-   /* @Override
+   @Override
     public ArrayList<Item> loadItems() 
     {
         ArrayList<Item> items = new ArrayList<>();
 
         Trophy trophy = new Trophy(1, getMapTile(13, 17).getLocation());
-        trophy.setExistenceFlag("hasTouchedTrophy");
         trophy.setInteractScript(new TrophyScript());
         items.add(trophy);
+
+        CTice ctice = new CTice(1, getMapTile(13,13).getLocation());
+        ctice.setInteractScript(new TrophyScript());
+        items.add(ctice);
+
+        FriendBell friendbell = new FriendBell(1, getMapTile(13, 9).getLocation());
+        friendbell.setInteractScript(new TrophyScript());
+        items.add(friendbell);
         
         return items;
     }
-    */
+    
 
     @Override
     public ArrayList<Trigger> loadTriggers() {

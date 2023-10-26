@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class MenuBar extends JMenuBar {
     JMenu options;
     JCheckBoxMenuItem showNpcs;
+    JCheckBoxMenuItem showItems;
     JCheckBoxMenuItem showEnchancedMapTiles;
     JCheckBoxMenuItem showTriggers;
 
@@ -20,6 +21,14 @@ public class MenuBar extends JMenuBar {
             }
         });
         options.add(showNpcs);
+        showItems = new JCheckBoxMenuItem("Show Items");
+        showItems.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tileBuilder.setShowItems(!tileBuilder.getShowItems());
+            }
+        });
+        options.add(showItems);
         showEnchancedMapTiles = new JCheckBoxMenuItem("Show Enhanced Map Tiles");
         showEnchancedMapTiles.addActionListener(new ActionListener() {
             @Override

@@ -35,12 +35,12 @@ public abstract class Player extends GameObject {
 
     // define keys
     protected KeyLocker keyLocker = new KeyLocker();
-    protected Key MOVE_LEFT_KEY = Key.LEFT;
-    protected Key MOVE_RIGHT_KEY = Key.RIGHT;
-    protected Key MOVE_UP_KEY = Key.UP;
-    protected Key MOVE_DOWN_KEY = Key.DOWN;
+    protected Key MOVE_LEFT_KEY = Key.A;
+    protected Key MOVE_RIGHT_KEY = Key.D;
+    protected Key MOVE_UP_KEY = Key.W;
+    protected Key MOVE_DOWN_KEY = Key.S;
     protected Key INTERACT_KEY = Key.SPACE;
-    protected Key SPRINT_KEY = Key.S;
+    protected Key SPRINT_KEY = Key.SHIFT;
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
