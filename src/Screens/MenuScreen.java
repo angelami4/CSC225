@@ -89,7 +89,6 @@ public class MenuScreen extends Screen {
         // if enter is pressed on menu item, change to appropriate screen based on which menu item was chosen
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
-            keyLocker.lockKey(Key.ENTER);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             menuItemSelected = currentMenuItemHovered;
