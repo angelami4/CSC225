@@ -45,16 +45,21 @@ public class BattleScreen extends Screen {
         bobcatHealth = 100;
         keyLocker.lockKey(Key.SPACE);
         keyLocker.lockKey(Key.Y);
+
+        int initialY = 430; 
+        int ySpacing = 50;
         
-        // Initialize attack options
+    // Initialize attack options
         attackOptions = new ArrayList<>();
-        attackOptions.add(new SpriteFont("HEAVY", 50, 300, "Trebuchet MS", 22, Color.black));
-        attackOptions.add(new SpriteFont("LIGHT", 50, 350, "Trebuchet MS", 22, Color.black));
-        attackOptions.add(new SpriteFont("DEFEND", 50, 400, "Trebuchet MS", 22, Color.black));
+        attackOptions.add(new SpriteFont("HEAVY", 50, initialY, "Trebuchet MS", 22, Color.black));
+        attackOptions.add(new SpriteFont("LIGHT", 50, initialY + ySpacing, "Trebuchet MS", 22, Color.black));
+        attackOptions.add(new SpriteFont("DEFEND", 50, initialY + 2 * ySpacing, "Trebuchet MS", 22, Color.black));
         selectedAttack = 0;
         
         attackMessage = new SpriteFont("", 300, 250, "Trebuchet MS", 30, Color.black); // Add this line
     }
+
+    //add action listener so buttons can be pressed
 
     @Override
     public void update() {
@@ -89,8 +94,8 @@ public class BattleScreen extends Screen {
     
 
     public void draw(GraphicsHandler graphicsHandler) {
-        graphicsHandler.drawFilledRectangle(0, 420, 450, 160, Color.black);
-        graphicsHandler.drawFilledRectangle(500, 420, 400, 160, Color.black);
+        graphicsHandler.drawFilledRectangle(0, 420, 450, 160, Color.white);
+        graphicsHandler.drawFilledRectangle(500, 420, 400, 160, Color.white);
         winMessage.draw(graphicsHandler);
         playerHP.draw(graphicsHandler);
         enemyHP.draw(graphicsHandler);
