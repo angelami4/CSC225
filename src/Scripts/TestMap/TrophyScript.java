@@ -1,15 +1,9 @@
 package Scripts.TestMap;
 
-import Builders.FrameBuilder;
-import Builders.MapTileBuilder;
-import GameObject.Frame;
 import Level.*;
-import Utils.Direction;
-import Utils.Point;
 
-public class TrophyScript extends Script<NPC>
+public class TrophyScript extends Script<Item>
 {
-
     @Override
     protected void setup() {
         if (!isFlagSet("hasTouchedTrophy")) {

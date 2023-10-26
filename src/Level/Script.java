@@ -136,6 +136,15 @@ public abstract class Script<T extends MapEntity> {
         return null;
     }
 
+    protected Item getItem(int itemId) {
+        for (Item item : map.getItems()) {
+            if (item.getId() == itemId) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     // force an npc instance to face the player
     // npc chosen based on its id value
     protected void npcFacePlayer(int npcId) {
@@ -163,12 +172,26 @@ public abstract class Script<T extends MapEntity> {
         }
     }
 
+    protected void itemSetAnimation(int itemId, String animationName) {
+        Item item = getItem(itemId);
+        if (item != null) {
+            item.setCurrentAnimationName(animationName);
+        }
+    }
+
     // force an npc to enter a specified frame of their current animation
     // npc chosen based on its id value
     protected void npcSetAnimationFrameIndex(int npcId, int frameIndex) {
         NPC npc = getNPC(npcId);
         if (npc != null) {
             npc.setCurrentAnimationFrameIndex(frameIndex);
+        }
+    }
+
+    protected void itemSetAnimationFramIndex(int itemId, int frameIndex) {
+        Item item = getItem(itemId);
+        if (item != null) {
+            item.setCurrentAnimationFrameIndex(frameIndex);
         }
     }
 
