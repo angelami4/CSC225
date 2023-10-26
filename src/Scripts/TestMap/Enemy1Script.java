@@ -3,15 +3,9 @@ package Scripts.TestMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Game.GameState;
+
 import Game.ScreenCoordinator;
-import Builders.FrameBuilder;
-import Builders.MapTileBuilder;
-import GameObject.Frame;
-import Level.*;
-import Utils.Direction;
-import Utils.Point;
-import Utils.Sound;
+
 // script for talking to walrus npc
 public class Enemy1Script extends Script<NPC> {
     protected ScreenCoordinator screenCoordinator;

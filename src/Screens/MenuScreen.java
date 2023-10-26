@@ -38,7 +38,7 @@ public class MenuScreen extends Screen {
         title = new SpriteFont("THE ROAD TO VICTORY", 100, 40, "Impact", 60, new Color(200, 0, 0));
         title.setOutlineColor(Color.black);
         title.setOutlineThickness(3);
-        info = new SpriteFont("Use Enter Key for Selections", 30, 540, "Trebuchet MS", 20, new Color(200, 0, 200));
+        info = new SpriteFont("Use Space Key for Selections", 30, 540, "Trebuchet MS", 20, new Color(200, 0, 200));
         info.setOutlineColor(Color.black);
         info.setOutlineThickness(2);
         background = new TitleScreenMap();
@@ -46,6 +46,7 @@ public class MenuScreen extends Screen {
         keyPressTimer = 0;
         menuItemSelected = -1;
         keyLocker.lockKey(Key.ENTER);
+        keyLocker.lockKey(Key.ESC);
     }
 
     public void update() {
@@ -86,10 +87,10 @@ public class MenuScreen extends Screen {
         }
 
         // if enter is pressed on menu item, change to appropriate screen based on which menu item was chosen
-        if (Keyboard.isKeyUp(Key.ENTER)) {
-            keyLocker.unlockKey(Key.ENTER);
+        if (Keyboard.isKeyUp(Key.SPACE)) {
+            keyLocker.unlockKey(Key.SPACE);
         }
-        if (!keyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyDown(Key.ENTER)) {
+        if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
                 screenCoordinator.setGameState(GameState.LEVEL);

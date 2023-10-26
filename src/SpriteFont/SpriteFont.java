@@ -37,6 +37,10 @@ public class SpriteFont {
 	public String getText() {
 		return text;
 	}
+	public String remove(){
+		text = "";
+		return text;
+	}
 
 	public Font getFont() { return font; }
 

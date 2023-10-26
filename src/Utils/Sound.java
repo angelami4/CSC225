@@ -6,28 +6,25 @@ import Engine.Config;
 
 public class Sound implements LineListener {
 
-    // Tracks if playback is finished or not
+    //shows if playback is finished or not
     private boolean isPlaybackComplete;
-    // Determines if audio should loop or not
+    //shows if audio should loop or not
     private boolean isLooping;
-    // Imports clip object for playback
+    //imports clip 
     private Clip audioClip;
 
-    /**
-     * Constructor for sound class that takes audio file name and isLooping boolean
-     * @param audioFileName
-     * @param loop
-     */
+
+     //Constructor that takes file name and if it loops
     public Sound(String audioFileName, boolean loop) {
         this.isLooping = loop;
         try {
             // Object for audio file in Sounds folder
             File audioFile = new File(Config.SOUNDS_PATH + audioFileName);
-            // Gets AudioInputStream from audio file
+            // Gets input stream from audio file
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             // Gets format from AudioInputStream
             AudioFormat audioFormat = audioStream.getFormat();
-            // Specifies we are working with Clip
+            // Specifies we are working with "Clip"
             DataLine.Info audioInfo = new DataLine.Info(Clip.class, audioFormat);
             // Gets clip instance from AudioSystem based on data info
             audioClip = (Clip) AudioSystem.getLine(audioInfo);
@@ -41,9 +38,6 @@ public class Sound implements LineListener {
         }
     }
 
-    /**
-     * Calls LineListener interface when line event occurs
-     */
     @Override
     public void update(LineEvent event) {
         LineEvent.Type type = event.getType();
@@ -53,13 +47,10 @@ public class Sound implements LineListener {
         }
     }
 
-    /**
-     * Plays the audio
-     */
     public void play() {
         if (audioClip != null) {
             if (isLooping) {
-                // if looping is enabled for audio, repeat it infinitely
+                //if looping is labeled true, loop it
                 audioClip.loop(Clip.LOOP_CONTINUOUSLY);
             }
             // Plays the audio
@@ -75,9 +66,6 @@ public class Sound implements LineListener {
         }
     }
 
-    /**
-     * Pauses the audio
-     */
     public void pause() {
         if (audioClip != null) {
             // Stops the audio

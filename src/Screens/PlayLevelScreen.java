@@ -9,6 +9,7 @@ import Maps.TestMap;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
+import Utils.Sound;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -17,7 +18,10 @@ public class PlayLevelScreen extends Screen {
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
+    protected BattleScreen battleScreen;
     protected FlagManager flagManager;
+    Sound background = new Sound("ruins.wav", true);
+    Sound fightStart = new Sound("fight!.wav", false);
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -32,8 +36,11 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasTouchedTrophy", false);
         flagManager.addFlag("hasTalkedToEnemy1", false);
+        background.play();
+        battleScreen = new BattleScreen(this.screenCoordinator);
 
-
+        
+    
         // define/setup map
         this.map = new TestMap();
         map.setFlagManager(flagManager);
@@ -92,11 +99,18 @@ public class PlayLevelScreen extends Screen {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
                 player.update();
+                background.play();
                 map.update(player);
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
+                background.pause();
+                break;
+              case BATTLE_ACTIVATE:
+                battleScreen.update();
+                background.pause();
+                fightStart.play();
                 break;
         }
 
@@ -106,18 +120,21 @@ public class PlayLevelScreen extends Screen {
         }
 
          if (map.getFlagManager().isFlagSet("hasTalkedToWalrus")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+            playLevelScreenState = PlayLevelScreenState.BATTLE_ACTIVATE;
         }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
         switch (playLevelScreenState) {
-            case RUNNING:
-                map.draw(player, graphicsHandler);
+            case RUNNING:    
+            map.draw(player, graphicsHandler);
                 break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
+                break;
+              case BATTLE_ACTIVATE:
+                battleScreen.draw(graphicsHandler);
                 break;
         }
     }
@@ -137,6 +154,6 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED,
+        RUNNING, LEVEL_COMPLETED, BATTLE_ACTIVATE
     }
 }
