@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BattleScreen extends Screen {
-    protected SpriteFont winMessage;
     protected SpriteFont playerHP;
     protected SpriteFont enemyHP;
     protected SpriteFont instructions;
@@ -32,6 +31,7 @@ public class BattleScreen extends Screen {
     protected long attackMessageTimer;
     protected long attackMessageDuration = 2000;
     protected boolean fightMessageDisplayed = false;  
+    protected boolean fightMessageTimer;
 
     public BattleScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -138,7 +138,6 @@ public class BattleScreen extends Screen {
     public void draw(GraphicsHandler graphicsHandler) {
         graphicsHandler.drawFilledRectangle(0, 420, 450, 160, Color.white);
         graphicsHandler.drawFilledRectangle(500, 420, 400, 160, Color.white);
-        winMessage.draw(graphicsHandler);
         playerHP.draw(graphicsHandler);
         enemyHP.draw(graphicsHandler);
 
