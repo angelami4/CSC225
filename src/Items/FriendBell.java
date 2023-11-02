@@ -12,11 +12,11 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-public class Trophy extends Item
+public class FriendBell extends Item
 {
-    public Trophy(int id, Point location)
+    public FriendBell(int id, Point location)
     {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Frozen4.png"), 32, 32), "DEFAULT");
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("FriendBell.png"), 24, 24), "DEFAULT");
     }
 
     @Override

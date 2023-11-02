@@ -18,7 +18,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 public class BattleScreen extends Screen {
-    protected SpriteFont winMessage;
     protected SpriteFont playerHP;
     protected SpriteFont enemyHP;
     protected SpriteFont instructions;
@@ -33,7 +32,11 @@ public class BattleScreen extends Screen {
 
     protected List<SpriteFont> attackOptions;
     protected int selectedAttack;
-    protected SpriteFont attackMessage; // Add this line
+    protected SpriteFont attackMessage;
+    protected long attackMessageTimer;
+    protected long attackMessageDuration = 2000;
+    protected boolean fightMessageDisplayed = false;  
+    protected boolean fightMessageTimer;
 
     protected BufferedImage backgroundImage; 
     protected BufferedImage playerImage;
@@ -58,9 +61,8 @@ public class BattleScreen extends Screen {
 
     @Override
     public void initialize() {
-        winMessage = new SpriteFont("FIGHT!", 300, 200, "Trebuchet MS", 60, Color.black);
         playerHP = new SpriteFont("BOBCAT | 100 HP", 15, 15, "Trebuchet MS", 22, Color.black);
-        enemyHP = new SpriteFont("ENEMY | 150 HP", 625, 15, "Trebuchet MS", 22, Color.black);
+        enemyHP = new SpriteFont("ENEMY | 150 HP", 600, 15, "Trebuchet MS", 22, Color.black);
         rectangle = new Rectangle();
         coleHealth = 150;
         bobcatHealth = 100;
@@ -76,8 +78,7 @@ public class BattleScreen extends Screen {
         attackOptions.add(new SpriteFont("LIGHT", 50, initialY + ySpacing, "Trebuchet MS", 22, Color.black));
         attackOptions.add(new SpriteFont("DEFEND", 50, initialY + 2 * ySpacing, "Trebuchet MS", 22, Color.black));
         selectedAttack = 0;
-        
-        attackMessage = new SpriteFont("", 300, 250, "Trebuchet MS", 30, Color.black); // Add this line
+        attackMessage = new SpriteFont("", 300, 250, "Trebuchet MS", 30, Color.black);
     }
 
     //add action listener so buttons can be pressed
@@ -87,32 +88,73 @@ public class BattleScreen extends Screen {
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
         }
-    
-        if (Keyboard.isKeyUp(Key.Y)) {
-            keyLocker.unlockKey(Key.Y);
+
+        if (Keyboard.isKeyUp(Key.ENTER)) {
+            keyLocker.unlockKey(Key.ENTER);
         }
-    
-        if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
-            playLevelScreen.resetLevel();
-        } else if (Keyboard.isKeyDown(Key.ESC) && !keyLocker.isKeyLocked(Key.SPACE)) {
+        
+        if (Keyboard.isKeyUp(Key.UP)) {
+            keyLocker.unlockKey(Key.UP);
+        }
+
+        if (Keyboard.isKeyUp(Key.DOWN)) {
+            keyLocker.unlockKey(Key.DOWN);
+        }
+
+        if (Keyboard.isKeyDown(Key.ESC) && !keyLocker.isKeyLocked(Key.ESC)) {
             playLevelScreen.goBackToMenu();
-        } else if (Keyboard.isKeyDown(Key.Y) && !keyLocker.isKeyLocked(Key.Y)) {
-            // Handle the selected attack here
-            String attackName = attackOptions.get(selectedAttack).getText();
-            attackMessage.setText("Pikachu used " + attackName + "!!!");
-        } else if (Keyboard.isKeyDown(Key.U) && !keyLocker.isKeyLocked(Key.U)) {
-            String attackName = attackOptions.get(selectedAttack).getText();
-            attackMessage.setText("Bobcat used " + attackName + "!!!");
+        } else if (!fightMessageDisplayed) {  
+            fightMessageDisplayed = true;
+            attackMessage.setText("FIGHT!");
+            attackMessageTimer = System.currentTimeMillis();
+        } else {
+            if (Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER)) {
+                String attackName = attackOptions.get(selectedAttack).getText();
+                int damage = 0;
+
+                // Determine damage based on the selected attack
+                if (selectedAttack == 0) {
+                    attackMessage.setText("Bobcat used HEAVY attack!!!");
+                    damage = 20; 
+                } else if (selectedAttack == 1) {
+                    attackMessage.setText("Bobcat used LIGHT attack!!!");
+                    damage = 10; 
+                } else if (selectedAttack == 2) {
+                    attackMessage.setText("Bobcat used DEFEND!!!");
+                
+                }
+
+               
+                bobcatHealth -= damage;
+                
+                bobcatHealth = Math.max(0, bobcatHealth - damage);
+                
+                enemyHP.setText("ENEMY | " + bobcatHealth + " HP");
+
+                attackMessageTimer = System.currentTimeMillis();
+                keyLocker.lockKey(Key.ENTER);
+            }
+
+            if (Keyboard.isKeyDown(Key.UP) && !keyLocker.isKeyLocked(Key.UP)) {
+                if (selectedAttack > 0) {
+                    selectedAttack--;
+                }
+                keyLocker.lockKey(Key.UP);
+            }
+
+            if (Keyboard.isKeyDown(Key.DOWN) && !keyLocker.isKeyLocked(Key.DOWN)) {
+                if (selectedAttack < attackOptions.size() - 1) {
+                    selectedAttack++;
+                }
+                keyLocker.lockKey(Key.DOWN);
+            }
         }
-    
-        // Handle attack option selection (up and down arrow keys)
-        if (Keyboard.isKeyDown(Key.DOWN) && selectedAttack < attackOptions.size() - 1) {
-            selectedAttack++;
-        } else if (Keyboard.isKeyDown(Key.UP) && selectedAttack > 0) {
-            selectedAttack--;
+
+        if (attackMessageTimer > 0 && System.currentTimeMillis() - attackMessageTimer >= attackMessageDuration) {
+            attackMessage.setText("");
+            attackMessageTimer = 0;
         }
     }
-    
 
     public void draw(GraphicsHandler graphicsHandler) {
         if (backgroundImage != null) {
@@ -127,11 +169,9 @@ public class BattleScreen extends Screen {
 
         graphicsHandler.drawFilledRectangle(0, 420, 450, 160, Color.white);
         graphicsHandler.drawFilledRectangle(500, 420, 400, 160, Color.white);
-        winMessage.draw(graphicsHandler);
         playerHP.draw(graphicsHandler);
         enemyHP.draw(graphicsHandler);
-        
-        // Draw attack options with a different color for the selected option
+
         for (SpriteFont attackOption : attackOptions) {
             int currentIndex = attackOptions.indexOf(attackOption);
             if (currentIndex == selectedAttack) {
@@ -141,8 +181,7 @@ public class BattleScreen extends Screen {
             }
             attackOption.draw(graphicsHandler);
         }
-        
-        // Draw the attack message
+
         attackMessage.draw(graphicsHandler);
     }
 }
