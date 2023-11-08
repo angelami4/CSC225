@@ -221,28 +221,28 @@ public class GamePanel extends JPanel {
 
 		// if game is paused, draw pause gfx over Screen gfx
 		if (isGamePaused) {
-			// graphicsHandler.drawFilledRectangleWithBorder(20, 50, 180, 210, Color.black, Color.white, 3);
-			// graphicsHandler.drawFilledRectangleWithBorder(20, 270, 180, 250, Color.black, Color.white, 3);
-			// graphicsHandler.drawFilledRectangleWithBorder(210, 50,400, 300, Color.black, Color.white, 3);
-			// graphicsHandler.drawFilledRectangleWithBorder(210, 360, 400, 160, Color.black, Color.white, 3);
-			// graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
-			// pauseLabel.draw(graphicsHandler);
-			// healthLabel.draw(graphicsHandler);
-			// attackTitle.draw(graphicsHandler);
-			// itemTitle.draw(graphicsHandler);
-			// dmgBoost1.draw(graphicsHandler);
-			// dmgBoost2.draw(graphicsHandler);
-			// dmgBoost3.draw(graphicsHandler);
-			// item0.draw(graphicsHandler);
-			// item1.draw(graphicsHandler);
-			// item2.draw(graphicsHandler);
-			// item3.draw(graphicsHandler);
-			// bobcatLabel.draw(graphicsHandler);
-			// levelNumber.draw(graphicsHandler);
-			// trophyLabel.draw(graphicsHandler);
-			// itemLabel.draw(graphicsHandler);
-			// attackListLabel.draw(graphicsHandler);
-			// infoLabel.draw(graphicsHandler);
+			graphicsHandler.drawFilledRectangleWithBorder(20, 50, 180, 210, Color.black, Color.white, 3);
+			graphicsHandler.drawFilledRectangleWithBorder(20, 270, 180, 250, Color.black, Color.white, 3);
+			graphicsHandler.drawFilledRectangleWithBorder(210, 50,400, 300, Color.black, Color.white, 3);
+			graphicsHandler.drawFilledRectangleWithBorder(210, 360, 400, 160, Color.black, Color.white, 3);
+			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
+			pauseLabel.draw(graphicsHandler);
+			healthLabel.draw(graphicsHandler);
+			attackTitle.draw(graphicsHandler);
+			itemTitle.draw(graphicsHandler);
+			dmgBoost1.draw(graphicsHandler);
+			dmgBoost2.draw(graphicsHandler);
+			dmgBoost3.draw(graphicsHandler);
+			item0.draw(graphicsHandler);
+			item1.draw(graphicsHandler);
+			item2.draw(graphicsHandler);
+			item3.draw(graphicsHandler);
+			bobcatLabel.draw(graphicsHandler);
+			levelNumber.draw(graphicsHandler);
+			trophyLabel.draw(graphicsHandler);
+			itemLabel.draw(graphicsHandler);
+			attackListLabel.draw(graphicsHandler);
+			infoLabel.draw(graphicsHandler);
 		}
 
 		if (showFPS) {
