@@ -45,8 +45,8 @@ public class BattleScreen extends Screen {
     protected int health = GamePanel.health;
     protected int playerX = 20;
     protected int playerY = 100;
-    protected int enemyX = 430;
-    protected int enemyY = 100;
+    protected int enemyX = 530;
+    protected int enemyY = 150;
 
     public BattleScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -54,7 +54,7 @@ public class BattleScreen extends Screen {
         try {
             backgroundImage = ImageIO.read(new File("Resources/rink.jpg")); 
             playerImage = ImageIO.read(new File("Resources/happi.gif")); 
-            enemyImage = ImageIO.read(new File("Resources/happi.gif")); 
+            enemyImage = ImageIO.read(new File("Resources/b2.png")); 
         } catch (IOException e) {
             e.printStackTrace();
         }
