@@ -1,5 +1,6 @@
 package Screens;
 
+import Engine.GamePanel;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
@@ -19,7 +20,10 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected BattleScreen battleScreen;
+    protected InventoryScreen inventoryScreen;
     protected FlagManager flagManager;
+    protected int health = GamePanel.health;
+    protected int bobcatHealth;
     Sound background = new Sound("ruins.wav", true);
     Sound fightStart = new Sound("fight!.wav", false);
 
@@ -38,9 +42,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToEnemy1", false);
         background.play();
         battleScreen = new BattleScreen(this.screenCoordinator);
-
-        
-    
+        bobcatHealth = health;
         // define/setup map
         this.map = new TestMap();
         map.setFlagManager(flagManager);
@@ -112,6 +114,9 @@ public class PlayLevelScreen extends Screen {
                 background.pause();
                 fightStart.play();
                 break;
+            case INVENTORY:
+                inventoryScreen.update();
+                break;
         }
 
         // if flag is set at any point during gameplay, game is "won"
@@ -154,6 +159,6 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, BATTLE_ACTIVATE
+        RUNNING, LEVEL_COMPLETED, BATTLE_ACTIVATE, INVENTORY
     }
 }
