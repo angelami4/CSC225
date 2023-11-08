@@ -7,6 +7,9 @@ import SpriteFont.SpriteFont;
 import Utils.Sound;
 import Maps.TestMap;
 import Game.GameState;
+import Combat.Battle;
+import Combat.NextMove;
+import Combat.WarriorMoves;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,8 +25,8 @@ public class BattleScreen extends Screen {
     protected GraphicsHandler graphicsHandler;
     protected ScreenCoordinator screenCoordinator;
 
-    protected int coleHealth;
-    protected int bobcatHealth;
+    public static int enemyHealth = 90;
+    public static int bobcatHealth = 100;
 
     protected List<SpriteFont> attackOptions;
     protected int selectedAttack;
@@ -40,10 +43,9 @@ public class BattleScreen extends Screen {
 
     @Override
     public void initialize() {
-        playerHP = new SpriteFont("BOBCAT | 100 HP", 15, 15, "Trebuchet MS", 22, Color.black);
-        enemyHP = new SpriteFont("ENEMY | 150 HP", 600, 15, "Trebuchet MS", 22, Color.black);
+        playerHP = new SpriteFont("BOBCAT | " + bobcatHealth + " HP", 15, 15, "Trebuchet MS", 22, Color.black);
+        enemyHP = new SpriteFont("ENEMY | " + enemyHealth + " HP", 600, 15, "Trebuchet MS", 22, Color.black);
         rectangle = new Rectangle();
-        coleHealth = 150;
         bobcatHealth = 100;
         keyLocker.lockKey(Key.SPACE);
         keyLocker.lockKey(Key.Y);
@@ -89,26 +91,54 @@ public class BattleScreen extends Screen {
         } else {
             if (Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER)) {
                 String attackName = attackOptions.get(selectedAttack).getText();
-                int damage = 0;
+                
 
                 // Determine damage based on the selected attack
                 if (selectedAttack == 0) {
-                    attackMessage.setText("Bobcat used HEAVY attack!!!");
-                    damage = 20; 
+                    attackMessage.setText("Bobcat used HEAVY Attack!!!");
+                    Battle.CatMove = NextMove.HEAVY;
+                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    if (Battle.CatTakesDamage == true)
+                    {
+                        bobcatHealth = bobcatHealth - 10;
+                    }
+                    else if (Battle.BossTakesDamage == true)
+                    {
+                        enemyHealth -= 10;
+                    }
+                    WarriorMoves.WarriorAI(NextMove.HEAVY); 
                 } else if (selectedAttack == 1) {
-                    attackMessage.setText("Bobcat used LIGHT attack!!!");
-                    damage = 10; 
+                    attackMessage.setText("Bobcat used LIGHT Attack!!!");
+                    Battle.CatMove = NextMove.LIGHT;
+                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    if (Battle.CatTakesDamage == true)
+                    {
+                        bobcatHealth = bobcatHealth - 10;
+                    }
+                    else if (Battle.BossTakesDamage == true)
+                    {
+                        enemyHealth -= 10;
+                    }
+                    WarriorMoves.WarriorAI(NextMove.LIGHT);
                 } else if (selectedAttack == 2) {
                     attackMessage.setText("Bobcat used DEFEND!!!");
-                
+                    Battle.CatMove = NextMove.DEFEND;
+                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    if (Battle.CatTakesDamage == true)
+                    {
+                        bobcatHealth = bobcatHealth - 10;
+                    }
+                    if (Battle.BossTakesDamage == true)
+                    {
+                        enemyHealth -= 10;
+                    }
+                    WarriorMoves.WarriorAI(NextMove.DEFEND);
                 }
 
                
-                bobcatHealth -= damage;
                 
-                bobcatHealth = Math.max(0, bobcatHealth - damage);
                 
-                enemyHP.setText("ENEMY | " + bobcatHealth + " HP");
+                enemyHP.setText("ENEMY | " + enemyHealth + " HP");
 
                 attackMessageTimer = System.currentTimeMillis();
                 keyLocker.lockKey(Key.ENTER);
