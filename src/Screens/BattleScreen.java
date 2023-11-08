@@ -65,10 +65,10 @@ public class BattleScreen extends Screen {
 
     @Override
     public void initialize() {
-        playerHP = new SpriteFont("BOBCAT | " + bobcatHealth + " HP", 15, 15, "Trebuchet MS", 22, Color.black);
-        enemyHP = new SpriteFont("ENEMY | " + enemyHealth + " HP", 600, 15, "Trebuchet MS", 22, Color.black);
+        playerHP = new SpriteFont("BOBCAT | " + bobcatHealth + " HP", 15, 15, "Trebuchet MS", 22, Color.white);
+        enemyHP = new SpriteFont("ENEMY | " + enemyHealth + " HP", 600, 15, "Trebuchet MS", 22, Color.white);
         rectangle = new Rectangle();
-        bobcatHealth = 100;
+       
         keyLocker.lockKey(Key.SPACE);
         keyLocker.lockKey(Key.Y);
 
