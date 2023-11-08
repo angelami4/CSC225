@@ -16,6 +16,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import Engine.GamePanel;
 
 public class BattleScreen extends Screen {
     protected SpriteFont playerHP;
@@ -41,7 +42,7 @@ public class BattleScreen extends Screen {
     protected BufferedImage backgroundImage; 
     protected BufferedImage playerImage;
     protected BufferedImage enemyImage;
-
+    protected int health = GamePanel.health;
     protected int playerX = 20;
     protected int playerY = 100;
     protected int enemyX = 430;
@@ -61,11 +62,11 @@ public class BattleScreen extends Screen {
 
     @Override
     public void initialize() {
-        playerHP = new SpriteFont("BOBCAT | 100 HP", 15, 15, "Trebuchet MS", 22, Color.black);
-        enemyHP = new SpriteFont("ENEMY | 150 HP", 600, 15, "Trebuchet MS", 22, Color.black);
+        playerHP = new SpriteFont("BOBCAT | " + health + " HP", 15, 15, "Trebuchet MS", 22, Color.white);
+        enemyHP = new SpriteFont("ENEMY | 150 HP", 600, 15, "Trebuchet MS", 22, Color.white);
         rectangle = new Rectangle();
         coleHealth = 150;
-        bobcatHealth = 100;
+        bobcatHealth = health;
         keyLocker.lockKey(Key.SPACE);
         keyLocker.lockKey(Key.Y);
 
