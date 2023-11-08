@@ -168,6 +168,7 @@ public class GamePanel extends JPanel {
 				infoLabel.setText("Pepsi drank! Gained 5 HP");
 				health += 5;
 				healthLabel.setText(health + "/100 HP");
+				keyLocker.lockKey(Key.ENTER);
             } 
 			else if (menuItemSelected == 2) {
 				keyPressTimer = 100;
