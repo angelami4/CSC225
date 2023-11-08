@@ -1,4 +1,4 @@
-package EnhancedMapTiles;
+/*package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
 import Engine.ImageLoader;
@@ -81,4 +81,4 @@ public class PushableRock extends EnhancedMapTile {
                 .build();
         return new GameObject(x, y, frame);
     }
-}
+}*/

@@ -12,8 +12,14 @@ import Combat.NextMove;
 import Combat.WarriorMoves;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import Engine.GamePanel;
 
 public class BattleScreen extends Screen {
     protected SpriteFont playerHP;
@@ -36,9 +42,25 @@ public class BattleScreen extends Screen {
     protected boolean fightMessageDisplayed = false;  
     protected boolean fightMessageTimer;
 
+    protected BufferedImage backgroundImage; 
+    protected BufferedImage playerImage;
+    protected BufferedImage enemyImage;
+    protected int health = GamePanel.health;
+    protected int playerX = 20;
+    protected int playerY = 100;
+    protected int enemyX = 530;
+    protected int enemyY = 150;
+
     public BattleScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
         initialize();
+        try {
+            backgroundImage = ImageIO.read(new File("Resources/rink.jpg")); 
+            playerImage = ImageIO.read(new File("Resources/happi.gif")); 
+            enemyImage = ImageIO.read(new File("Resources/b2.png")); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -166,6 +188,16 @@ public class BattleScreen extends Screen {
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
+        if (backgroundImage != null) {
+            graphicsHandler.drawImage(backgroundImage, 0, 0);
+        }
+        if (playerImage != null) {
+            graphicsHandler.drawImage(playerImage, playerX, playerY); 
+        }
+        if (enemyImage != null) {
+            graphicsHandler.drawImage(enemyImage, enemyX, enemyY);
+        }
+
         graphicsHandler.drawFilledRectangle(0, 420, 450, 160, Color.white);
         graphicsHandler.drawFilledRectangle(500, 420, 400, 160, Color.white);
         playerHP.draw(graphicsHandler);

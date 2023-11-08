@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class Walrus extends NPC {
 
     public Walrus(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Walrus.png"), 24, 24), "STAND_LEFT");
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("b1.png"), 24, 24), "STAND_LEFT");
     }
 
     public void update(Player player) {

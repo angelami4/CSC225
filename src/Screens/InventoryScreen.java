@@ -1,38 +1,30 @@
-package Engine;
-
-import GameObject.Rectangle;
+package Screens;
+import Level.Map;
 import SpriteFont.SpriteFont;
-import Utils.Colors;
 import Utils.Sound;
-
-import javax.swing.*;
-
-//import Game.GameState;
-
+import java.awt.event.KeyListener;
+import Engine.Config;
+import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.KeyLocker;
+import Engine.Keyboard;
+import Engine.Screen;
+import Engine.ScreenManager;
+import Game.ScreenCoordinator;
 import java.awt.*;
 
-/*
- * This is where the game loop process and render back buffer is setup
- */
-public class GamePanel extends JPanel {
-	// loads Screens on to the JPanel
-	// each screen has its own update and draw methods defined to handle a "section" of the game.
-	private ScreenManager screenManager;
-
-	// used to draw graphics to the panel
-	private GraphicsHandler graphicsHandler;
-
+public class InventoryScreen extends Screen {
+    protected ScreenCoordinator screenCoordinator;
+    protected Map background;
+    protected KeyLocker keyLocker = new KeyLocker();
+    private ScreenManager screenManager;
 	private boolean isGamePaused = false;
 	private SpriteFont pauseLabel;
-	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.ESC;
-	private Thread gameLoopProcess;
-
 	private Key showFPSKey = Key.G;
 	private SpriteFont fpsDisplayLabel;
 	private boolean showFPS = false;
 	private int currentFPS;
-
 	private SpriteFont healthLabel;
 	private SpriteFont attackTitle;
 	private SpriteFont itemTitle; 
@@ -53,18 +45,15 @@ public class GamePanel extends JPanel {
 	protected boolean isItemHovered;
     protected int menuItemSelected = -1;
 	protected int keyPressTimer;
-	public static int health;
 
-	// The JPanel and various important class instances are setup here
-	public GamePanel(){
-		super();
+    public InventoryScreen(ScreenCoordinator screenCoordinator){
+		this.screenCoordinator = screenCoordinator;
+	}
+	@Override
+	public void initialize() {
 		this.setDoubleBuffered(true);
-		health = 60;
-		// attaches Keyboard class's keyListener to this JPanel
 		this.addKeyListener(Keyboard.getKeyListener());
-
-		graphicsHandler = new GraphicsHandler();
-
+		new GraphicsHandler();
 		screenManager = new ScreenManager();
 		pauseLabel = new SpriteFont("MENU", 10, 10, "Trebuchet MS", 24, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
@@ -83,7 +72,7 @@ public class GamePanel extends JPanel {
 
 		bobcatLabel = new SpriteFont("Boomer", 30, 65, "Trebuchet MS", 24, Color.white);
 		levelNumber = new SpriteFont("LV 1", 30, 105, "Trebuchet MS", 16, Color.white);
-		healthLabel = new SpriteFont(health + "/100 HP", 30, 125, "Trebuchet MS", 16, Color.white);
+		healthLabel = new SpriteFont("100/100 HP", 30, 125, "Trebuchet MS", 16, Color.white);
 		trophyLabel = new SpriteFont("TROPHIES: 0", 30, 145, "Trebuchet MS", 16, Color.white);
 		itemLabel = new SpriteFont("    ITEMS", 30, 185, "Trebuchet MS", 16, Color.white);
 		attackListLabel = new SpriteFont("    ATTACK LIST", 30, 205, "Trebuchet MS", 16, Color.white);
@@ -93,31 +82,12 @@ public class GamePanel extends JPanel {
 
 		// this game loop code will run in a separate thread from the rest of the program
 		// will continually update the game's logic and repaint the game's graphics
-		GameLoop gameLoop = new GameLoop(this);
-		gameLoopProcess = new Thread(gameLoop.getGameLoopProcess());
-	}
-
-	// this is called later after instantiation, and will initialize screenManager
-	// this had to be done outside of the constructor because it needed to know the JPanel's width and height, which aren't available in the constructor
-	public void setupGame() {
-		setBackground(Colors.CORNFLOWER_BLUE);
-		screenManager.initialize(new Rectangle(getX(), getY(), getWidth(), getHeight()));
-	}
-
-	// this starts the timer (the game loop is started here
-	public void startGame() {
-		gameLoopProcess.start();
-	}
-
-	public ScreenManager getScreenManager() {
-		return screenManager;
-	}
-
-	public void setCurrentFPS(int currentFPS) {
-		this.currentFPS = currentFPS;
-	}
-
-	public void update() {
+    }
+    private void setDoubleBuffered(boolean b) {
+    }
+    private void addKeyListener(KeyListener keyListener) {
+    }
+    public void update() {
 		updatePauseState();
 		updateShowFPSState();
 		if (Keyboard.isKeyDown(Key.DOWN) && keyPressTimer == 0) {
@@ -161,50 +131,39 @@ public class GamePanel extends JPanel {
 				item0.remove();
             }
 			if (menuItemSelected == 1) {
-				keyPressTimer = 100;
 				item1.remove();
 				item2.setY(95);
 				item3.setY(125);
 				infoLabel.setText("Pepsi drank! Gained 5 HP");
-				health += 5;
-				healthLabel.setText(health + "/100 HP");
-				keyLocker.lockKey(Key.ENTER);
             } 
 			else if (menuItemSelected == 2) {
-				keyPressTimer = 100;
 				item2.remove();
 				item3.setY(125);
 				infoLabel.setText("Hot Dog eaten! Gained 10 HP");
-				health += 10;
-				healthLabel.setText(health + "/100 HP");
             } 
 			else if (menuItemSelected == 3){
-				keyPressTimer = 100;
 				item3.remove();
 				infoLabel.setText("Nachos eaten! Gained 20 HP");
-				health += 20;
-				healthLabel.setText(health + "/100 HP");
 			}
         }
 		if (!isGamePaused) {
 			screenManager.update();
 		}
 	}
-
-	private void updatePauseState() {
+    private void updatePauseState() {
 		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
 			isGamePaused = !isGamePaused;
 			keyLocker.lockKey(pauseKey);
 			Sound pause = new Sound("pause.wav", false);
 			pause.playOnce();
+			System.out.println("test");
 		}
 
 		if (Keyboard.isKeyUp(pauseKey)) {
 			keyLocker.unlockKey(pauseKey);
 		}
 	}
-
-	private void updateShowFPSState() {
+    private void updateShowFPSState() {
 		if (Keyboard.isKeyDown(showFPSKey) && !keyLocker.isKeyLocked(showFPSKey)) {
 			showFPS = !showFPS;
 			keyLocker.lockKey(showFPSKey);
@@ -215,11 +174,10 @@ public class GamePanel extends JPanel {
 		}
 
 		fpsDisplayLabel.setText("FPS: " + currentFPS);
-	}	
-
-	public void draw() {
+	}
+    @Override
+    public void draw(GraphicsHandler graphicsHandler){
 		screenManager.draw(graphicsHandler);
-
 		// if game is paused, draw pause gfx over Screen gfx
 		if (isGamePaused) {
 			graphicsHandler.drawFilledRectangleWithBorder(20, 50, 180, 210, Color.black, Color.white, 3);
@@ -249,14 +207,5 @@ public class GamePanel extends JPanel {
 		if (showFPS) {
 			fpsDisplayLabel.draw(graphicsHandler);
 		}
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		// every repaint call will schedule this method to be called
-		// when called, it will setup the graphics handler and then call this class's draw method
-		graphicsHandler.setGraphics((Graphics2D) g);
-		draw();
-	}
+	} 
 }
