@@ -18,12 +18,13 @@ public class PlayLevelScreen extends Screen {
     protected Map map;
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
-    protected WinScreen winScreen;
+    protected LoseScreen loseScreen;
     protected BattleScreen battleScreen;
     protected InventoryScreen inventoryScreen;
     protected FlagManager flagManager;
     protected int health = GamePanel.health;
     protected int bobcatHealth;
+    protected int enemyHealth;
     Sound background = new Sound("ruins.wav", true);
     Sound fightStart = new Sound("fight!.wav", false);
 
@@ -92,7 +93,7 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        winScreen = new WinScreen(this);
+        loseScreen = new LoseScreen(this);
     }
 
     public void update() {
@@ -105,8 +106,8 @@ public class PlayLevelScreen extends Screen {
                 map.update(player);
                 break;
             // if level has been completed, bring up level cleared screen
-            case LEVEL_COMPLETED:
-                winScreen.update();
+            case LEVEL_LOSE:
+                loseScreen.update();
                 background.pause();
                 break;
               case BATTLE_ACTIVATE:
@@ -120,12 +121,15 @@ public class PlayLevelScreen extends Screen {
         }
 
         // if flag is set at any point during gameplay, game is "won"
-        if (map.getFlagManager().isFlagSet("hasFoundBall")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-        }
+       // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
+         //   playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        //}
 
          if (map.getFlagManager().isFlagSet("hasTalkedToWalrus")) {
             playLevelScreenState = PlayLevelScreenState.BATTLE_ACTIVATE;
+              if (GamePanel.health <= 0 ) {
+              playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
+            }
         }
     }
 
@@ -135,8 +139,8 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:    
             map.draw(player, graphicsHandler);
                 break;
-            case LEVEL_COMPLETED:
-                winScreen.draw(graphicsHandler);
+            case LEVEL_LOSE:
+                loseScreen.draw(graphicsHandler);
                 break;
               case BATTLE_ACTIVATE:
                 battleScreen.draw(graphicsHandler);
@@ -159,6 +163,6 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, BATTLE_ACTIVATE, INVENTORY
+        RUNNING, LEVEL_LOSE, BATTLE_ACTIVATE, INVENTORY
     }
 }
