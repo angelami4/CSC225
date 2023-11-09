@@ -33,6 +33,7 @@ public class GamePanel extends JPanel {
 	private boolean showFPS = false;
 	private int currentFPS;
 	public static int health;
+	public static int bossHealth;
 	
 	protected int menuItemHovered = 0; // current menu item being "hovered" over
 	protected boolean isItemHovered;
@@ -43,6 +44,7 @@ public class GamePanel extends JPanel {
 	public GamePanel(){
 		super();
 		health = 50;
+		bossHealth = 60;
 		this.setDoubleBuffered(true);
 		// attaches Keyboard class's keyListener to this JPanel
 		this.addKeyListener(Keyboard.getKeyListener());
@@ -214,4 +216,5 @@ public class GamePanel extends JPanel {
 		graphicsHandler.setGraphics((Graphics2D) g);
 		draw();
 	}
+
 }

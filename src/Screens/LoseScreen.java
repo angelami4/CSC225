@@ -9,7 +9,7 @@ import Maps.TestMap;
 import java.awt.*;
 
 // This class is for the win level screen
-public class WinScreen extends Screen {
+public class LoseScreen extends Screen {
     protected SpriteFont loseMessage;
     //protected SpriteFont poopMessage;
     protected SpriteFont playerHP;
@@ -20,14 +20,14 @@ public class WinScreen extends Screen {
     protected Rectangle rectangle;
     protected GraphicsHandler graphicsHandler;
 
-    public WinScreen(PlayLevelScreen playLevelScreen) {
+    public LoseScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
         initialize();
     }
 
     @Override
     public void initialize() {
-        loseMessage = new SpriteFont("You Win! Press Escape.", 70, 200, "Trebuchet MS", 60, Color.black);
+        loseMessage = new SpriteFont("You Died, Press Escape.", 70, 200, "Trebuchet MS", 60, Color.black);
        // poopMessage = new SpriteFont("Press Escape To go To main Menu, Press space to reset ", 300, 200, "Trebuchet MS", 60, Color.black);
         
   
