@@ -5,7 +5,7 @@ import Game.Game;
 import Game.ScreenCoordinator;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
-//import Utils.Sound;
+import Utils.Sound;
 //import Maps.TestMap;
 //import Game.GameState;
 import Combat.Battle;
@@ -72,6 +72,8 @@ public class BattleScreen extends Screen {
         keyLocker.lockKey(Key.Y);
         int initialY = 430; 
         int ySpacing = 50;
+        //Sound warriorMusic = new Sound("spear-of-justice.wav", false);
+        //warriorMusic.play();
         
     // Initialize attack options
         attackOptions = new ArrayList<>();
