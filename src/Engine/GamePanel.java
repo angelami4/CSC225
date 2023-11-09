@@ -43,8 +43,8 @@ public class GamePanel extends JPanel {
 	// The JPanel and various important class instances are setup here
 	public GamePanel(){
 		super();
-		health = 50;
-		bossHealth = 60;
+		health = 60;
+		bossHealth = 50;
 		this.setDoubleBuffered(true);
 		// attaches Keyboard class's keyListener to this JPanel
 		this.addKeyListener(Keyboard.getKeyListener());
