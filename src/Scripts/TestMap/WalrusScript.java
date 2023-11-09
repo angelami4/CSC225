@@ -14,9 +14,11 @@ public class WalrusScript extends Script<NPC> {
 
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToWalrus")) {
-            addTextToTextboxQueue( "Hi Cat!");
-            addTextToTextboxQueue( "...oh, you lost your ball?");
-            addTextToTextboxQueue( "Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
+            addTextToTextboxQueue( "Bobcat: What are you doing on my rink!?!!?");
+            addTextToTextboxQueue( "Merrimack: IT SHALL BE MINE MWUHAHAHA");
+            addTextToTextboxQueue( "Bobcat: GRRRRRR");
+
+          //  addTextToTextboxQueue( "Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
         }
         else {
             addTextToTextboxQueue( "I sure love doing walrus things!");
