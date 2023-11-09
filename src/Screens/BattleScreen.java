@@ -81,7 +81,7 @@ public class BattleScreen extends Screen {
         attackOptions.add(new SpriteFont("LIGHT", 50, initialY + ySpacing, "Trebuchet MS", 22, Color.black));
         attackOptions.add(new SpriteFont("DEFEND", 50, initialY + 2 * ySpacing, "Trebuchet MS", 22, Color.black));
         selectedAttack = 0;
-        attackMessage = new SpriteFont("", 300, 250, "Trebuchet MS", 30, Color.black);
+        attackMessage = new SpriteFont("", 250, 151, "Trebuchet MS", 30, Color.white);
     }
 
     //add action listener so buttons can be pressed
@@ -109,6 +109,7 @@ public class BattleScreen extends Screen {
         } else if (!fightMessageDisplayed) {  
             fightMessageDisplayed = true;
             attackMessage.setText("FIGHT!");
+            attackMessage.setX(350);
             attackMessageTimer = System.currentTimeMillis();
         } else {
             if (Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER)) {
@@ -118,6 +119,7 @@ public class BattleScreen extends Screen {
                 // Determine damage based on the selected attack
                 if (selectedAttack == 0) {
                     attackMessage.setText("Bobcat used HEAVY Attack!!!");
+                    attackMessage.setX(200);
                     Battle.CatMove = NextMove.HEAVY;
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)
@@ -133,6 +135,7 @@ public class BattleScreen extends Screen {
                     WarriorMoves.WarriorAI(NextMove.HEAVY); 
                 } else if (selectedAttack == 1) {
                     attackMessage.setText("Bobcat used LIGHT Attack!!!");
+                    attackMessage.setX(200);
                     Battle.CatMove = NextMove.LIGHT;
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)
@@ -148,6 +151,7 @@ public class BattleScreen extends Screen {
                     WarriorMoves.WarriorAI(NextMove.LIGHT);
                 } else if (selectedAttack == 2) {
                     attackMessage.setText("Bobcat used DEFEND!!!");
+                    attackMessage.setX(200);
                     Battle.CatMove = NextMove.DEFEND;
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)
