@@ -2,6 +2,9 @@ package Screens;
 
 import Engine.GamePanel;
 import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.KeyLocker;
+import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
@@ -15,6 +18,8 @@ import Utils.Sound;
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
+    private final Key pauseKey = Key.ESC;
+    private KeyLocker keyLocker = new KeyLocker();
     protected Map map;
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
@@ -22,8 +27,9 @@ public class PlayLevelScreen extends Screen {
     protected BattleScreen battleScreen;
     protected InventoryScreen inventoryScreen;
     protected FlagManager flagManager;
-    protected int health = GamePanel.health;
+    protected int health = InventoryScreen.health;
     protected int bobcatHealth;
+    private boolean isGamePaused;
     Sound background = new Sound("ruins.wav", true);
     Sound fightStart = new Sound("fight!.wav", false);
 
@@ -54,7 +60,7 @@ public class PlayLevelScreen extends Screen {
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.player.setFacingDirection(Direction.LEFT);
-
+        
         // let pieces of map know which button to listen for as the "interact" button
         map.getTextbox().setInteractKey(player.getInteractKey());
 
@@ -91,11 +97,12 @@ public class PlayLevelScreen extends Screen {
                 trigger.getTriggerScript().setPlayer(player);
             }
         }
-
         winScreen = new WinScreen(this);
+        inventoryScreen = new InventoryScreen(this);
     }
 
     public void update() {
+        updatePauseState();
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
@@ -103,6 +110,10 @@ public class PlayLevelScreen extends Screen {
                 player.update();
                 background.play();
                 map.update(player);
+                if(isGamePaused){
+                    playLevelScreenState = PlayLevelScreenState.INVENTORY;
+                    keyLocker.lockKey(pauseKey);
+                }
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
@@ -118,7 +129,7 @@ public class PlayLevelScreen extends Screen {
                 inventoryScreen.update();
                 break;
         }
-
+        
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
@@ -141,6 +152,9 @@ public class PlayLevelScreen extends Screen {
               case BATTLE_ACTIVATE:
                 battleScreen.draw(graphicsHandler);
                 break;
+            case INVENTORY:
+                inventoryScreen.draw(graphicsHandler);
+                break;
         }
     }
 
@@ -148,6 +162,9 @@ public class PlayLevelScreen extends Screen {
         return playLevelScreenState;
     }
 
+    public void setPlayLevelScreenState(PlayLevelScreenState state){
+        this.playLevelScreenState = state;
+    }
 
     public void resetLevel() {
         initialize();
@@ -157,8 +174,21 @@ public class PlayLevelScreen extends Screen {
         screenCoordinator.setGameState(GameState.MENU);
     }
 
+    private void updatePauseState() {
+		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
+			isGamePaused = !isGamePaused;
+			keyLocker.lockKey(pauseKey);
+			Sound pause = new Sound("pause.wav", false);
+			pause.playOnce();
+		}
+
+		if (Keyboard.isKeyUp(pauseKey)) {
+			keyLocker.unlockKey(pauseKey);
+		}
+	}
+
     // This enum represents the different states this screen can be in
-    private enum PlayLevelScreenState {
+    public enum PlayLevelScreenState {
         RUNNING, LEVEL_COMPLETED, BATTLE_ACTIVATE, INVENTORY
     }
 }

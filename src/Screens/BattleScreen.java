@@ -19,7 +19,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import Engine.GamePanel;
+//import Engine.GamePanel;
 
 public class BattleScreen extends Screen {
     protected SpriteFont playerHP;
@@ -30,8 +30,9 @@ public class BattleScreen extends Screen {
     protected Rectangle rectangle;
     protected GraphicsHandler graphicsHandler;
     protected ScreenCoordinator screenCoordinator;
+    public static int health = GamePanel.health;
     public static int enemyHealth = 90;
-    public static int bobcatHealth;
+    public static int bobcatHealth = health;
 
     protected List<SpriteFont> attackOptions;
     protected int selectedAttack;
@@ -44,7 +45,6 @@ public class BattleScreen extends Screen {
     protected BufferedImage backgroundImage; 
     protected BufferedImage playerImage;
     protected BufferedImage enemyImage;
-    protected int health = GamePanel.health;
     protected int playerX = 20;
     protected int playerY = 100;
     protected int enemyX = 530;
@@ -64,7 +64,6 @@ public class BattleScreen extends Screen {
 
     @Override
     public void initialize() {
-        bobcatHealth = health;
         playerHP = new SpriteFont("BOBCAT | " + bobcatHealth + " HP", 15, 15, "Trebuchet MS", 22, Color.white);
         enemyHP = new SpriteFont("ENEMY | " + enemyHealth + " HP", 600, 15, "Trebuchet MS", 22, Color.white);
         rectangle = new Rectangle();
@@ -154,10 +153,7 @@ public class BattleScreen extends Screen {
                     }
                     WarriorMoves.WarriorAI(NextMove.DEFEND);
                 }
-
-               
-                
-                
+                playerHP.setText("BOBCAT | " + bobcatHealth + " HP");
                 enemyHP.setText("ENEMY | " + enemyHealth + " HP");
 
                 attackMessageTimer = System.currentTimeMillis();

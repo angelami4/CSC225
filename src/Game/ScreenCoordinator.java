@@ -55,9 +55,6 @@ public class ScreenCoordinator extends Screen {
 					case INSTRUCTIONS:
 						currentScreen = new InstructionScreen(this);
 						break;
-					case INVENTORY:
-						currentScreen = new InventoryScreen(this);
-						break;
 					case BATTLE:
 						currentScreen = new BattleScreen(this);
 						break;

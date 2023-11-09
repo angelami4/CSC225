@@ -1,9 +1,8 @@
 package Screens;
 import Level.Map;
+import Screens.PlayLevelScreen.PlayLevelScreenState;
 import SpriteFont.SpriteFont;
-import Utils.Sound;
-import java.awt.event.KeyListener;
-import Engine.Config;
+import Engine.GamePanel;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -17,14 +16,9 @@ public class InventoryScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map background;
     protected KeyLocker keyLocker = new KeyLocker();
-    private ScreenManager screenManager;
-	private boolean isGamePaused = false;
+	protected PlayLevelScreen playLevelScreen;
 	private SpriteFont pauseLabel;
-	private final Key pauseKey = Key.ESC;
-	private Key showFPSKey = Key.G;
-	private SpriteFont fpsDisplayLabel;
-	private boolean showFPS = false;
-	private int currentFPS;
+	
 	private SpriteFont healthLabel;
 	private SpriteFont attackTitle;
 	private SpriteFont itemTitle; 
@@ -40,21 +34,20 @@ public class InventoryScreen extends Screen {
 	private SpriteFont trophyLabel;
 	private SpriteFont itemLabel;
 	private SpriteFont attackListLabel;
-	private SpriteFont infoLabel;	
+	private SpriteFont infoLabel;
+	public static int health;
 	protected int menuItemHovered = 0; // current menu item being "hovered" over
 	protected boolean isItemHovered;
     protected int menuItemSelected = -1;
 	protected int keyPressTimer;
 
-    public InventoryScreen(ScreenCoordinator screenCoordinator){
-		this.screenCoordinator = screenCoordinator;
-	}
+    public InventoryScreen(PlayLevelScreen playLevelScreen) {
+        this.playLevelScreen = playLevelScreen;
+        initialize();
+    }
 	@Override
 	public void initialize() {
-		this.setDoubleBuffered(true);
-		this.addKeyListener(Keyboard.getKeyListener());
-		new GraphicsHandler();
-		screenManager = new ScreenManager();
+		health = GamePanel.health;
 		pauseLabel = new SpriteFont("MENU", 10, 10, "Trebuchet MS", 24, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
@@ -72,24 +65,18 @@ public class InventoryScreen extends Screen {
 
 		bobcatLabel = new SpriteFont("Boomer", 30, 65, "Trebuchet MS", 24, Color.white);
 		levelNumber = new SpriteFont("LV 1", 30, 105, "Trebuchet MS", 16, Color.white);
-		healthLabel = new SpriteFont("100/100 HP", 30, 125, "Trebuchet MS", 16, Color.white);
+		healthLabel = new SpriteFont(health + "/100 HP", 30, 125, "Trebuchet MS", 16, Color.white);
 		trophyLabel = new SpriteFont("TROPHIES: 0", 30, 145, "Trebuchet MS", 16, Color.white);
 		itemLabel = new SpriteFont("    ITEMS", 30, 185, "Trebuchet MS", 16, Color.white);
 		attackListLabel = new SpriteFont("    ATTACK LIST", 30, 205, "Trebuchet MS", 16, Color.white);
 		infoLabel = new SpriteFont("Use Enter Key to pick Item!", 220, 370, "Trebuchet MS", 21, Color.white);
-		fpsDisplayLabel = new SpriteFont("FPS", 4, 3, "Comic Sans", 12, Color.black);
-		currentFPS = Config.TARGET_FPS;
-
-		// this game loop code will run in a separate thread from the rest of the program
-		// will continually update the game's logic and repaint the game's graphics
     }
-    private void setDoubleBuffered(boolean b) {
-    }
-    private void addKeyListener(KeyListener keyListener) {
-    }
+    
     public void update() {
-		updatePauseState();
-		updateShowFPSState();
+		if (Keyboard.isKeyDown(Key.ESC)) {
+			playLevelScreen.setPlayLevelScreenState(PlayLevelScreenState.RUNNING);
+		}
+		
 		if (Keyboard.isKeyDown(Key.DOWN) && keyPressTimer == 0) {
             keyPressTimer = 14;
 			menuItemHovered++;
@@ -146,66 +133,30 @@ public class InventoryScreen extends Screen {
 				infoLabel.setText("Nachos eaten! Gained 20 HP");
 			}
         }
-		if (!isGamePaused) {
-			screenManager.update();
-		}
 	}
-    private void updatePauseState() {
-		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
-			isGamePaused = !isGamePaused;
-			keyLocker.lockKey(pauseKey);
-			Sound pause = new Sound("pause.wav", false);
-			pause.playOnce();
-			System.out.println("test");
-		}
-
-		if (Keyboard.isKeyUp(pauseKey)) {
-			keyLocker.unlockKey(pauseKey);
-		}
-	}
-    private void updateShowFPSState() {
-		if (Keyboard.isKeyDown(showFPSKey) && !keyLocker.isKeyLocked(showFPSKey)) {
-			showFPS = !showFPS;
-			keyLocker.lockKey(showFPSKey);
-		}
-
-		if (Keyboard.isKeyUp(showFPSKey)) {
-			keyLocker.unlockKey(showFPSKey);
-		}
-
-		fpsDisplayLabel.setText("FPS: " + currentFPS);
-	}
+    
     @Override
     public void draw(GraphicsHandler graphicsHandler){
-		screenManager.draw(graphicsHandler);
-		// if game is paused, draw pause gfx over Screen gfx
-		if (isGamePaused) {
-			graphicsHandler.drawFilledRectangleWithBorder(20, 50, 180, 210, Color.black, Color.white, 3);
-			graphicsHandler.drawFilledRectangleWithBorder(20, 270, 180, 250, Color.black, Color.white, 3);
-			graphicsHandler.drawFilledRectangleWithBorder(210, 50,400, 300, Color.black, Color.white, 3);
-			graphicsHandler.drawFilledRectangleWithBorder(210, 360, 400, 160, Color.black, Color.white, 3);
-			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
-			pauseLabel.draw(graphicsHandler);
-			healthLabel.draw(graphicsHandler);
-			attackTitle.draw(graphicsHandler);
-			itemTitle.draw(graphicsHandler);
-			dmgBoost1.draw(graphicsHandler);
-			dmgBoost2.draw(graphicsHandler);
-			dmgBoost3.draw(graphicsHandler);
-			item0.draw(graphicsHandler);
-			item1.draw(graphicsHandler);
-			item2.draw(graphicsHandler);
-			item3.draw(graphicsHandler);
-			bobcatLabel.draw(graphicsHandler);
-			levelNumber.draw(graphicsHandler);
-			trophyLabel.draw(graphicsHandler);
-			itemLabel.draw(graphicsHandler);
-			attackListLabel.draw(graphicsHandler);
-			infoLabel.draw(graphicsHandler);
-		}
-
-		if (showFPS) {
-			fpsDisplayLabel.draw(graphicsHandler);
-		}
-	} 
+		graphicsHandler.drawFilledRectangleWithBorder(20, 50, 180, 210, Color.black, Color.white, 3);
+		graphicsHandler.drawFilledRectangleWithBorder(20, 270, 180, 250, Color.black, Color.white, 3);
+		graphicsHandler.drawFilledRectangleWithBorder(210, 50,400, 300, Color.black, Color.white, 3);
+		graphicsHandler.drawFilledRectangleWithBorder(210, 360, 400, 160, Color.black, Color.white, 3);
+		graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));			pauseLabel.draw(graphicsHandler);
+		healthLabel.draw(graphicsHandler);
+		attackTitle.draw(graphicsHandler);
+		itemTitle.draw(graphicsHandler);
+		dmgBoost1.draw(graphicsHandler);
+		dmgBoost2.draw(graphicsHandler);
+		dmgBoost3.draw(graphicsHandler);
+		item0.draw(graphicsHandler);
+		item1.draw(graphicsHandler);
+		item2.draw(graphicsHandler);
+		item3.draw(graphicsHandler);
+		bobcatLabel.draw(graphicsHandler);
+		levelNumber.draw(graphicsHandler);
+		trophyLabel.draw(graphicsHandler);
+		itemLabel.draw(graphicsHandler);
+		attackListLabel.draw(graphicsHandler);
+		infoLabel.draw(graphicsHandler);
+	}
 }
