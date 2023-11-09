@@ -1,12 +1,16 @@
 package Screens;
 
 import Engine.*;
+import Game.Game;
 import Game.ScreenCoordinator;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
 import Utils.Sound;
-import Maps.TestMap;
-import Game.GameState;
+//import Maps.TestMap;
+//import Game.GameState;
+import Combat.Battle;
+import Combat.NextMove;
+import Combat.WarriorMoves;
 
 import java.awt.*;
 import java.io.File;
@@ -16,6 +20,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+//import Engine.GamePanel;
 
 public class BattleScreen extends Screen {
     protected SpriteFont playerHP;
@@ -26,9 +31,9 @@ public class BattleScreen extends Screen {
     protected Rectangle rectangle;
     protected GraphicsHandler graphicsHandler;
     protected ScreenCoordinator screenCoordinator;
-
-    protected int coleHealth;
-    protected int bobcatHealth;
+    //public int health = GamePanel.health;
+    //public int enemyHealth = 90;
+    //public int bobcatHealth = GamePanel.health;
 
     protected List<SpriteFont> attackOptions;
     protected int selectedAttack;
@@ -41,7 +46,6 @@ public class BattleScreen extends Screen {
     protected BufferedImage backgroundImage; 
     protected BufferedImage playerImage;
     protected BufferedImage enemyImage;
-
     protected int playerX = 20;
     protected int playerY = 150;
     protected int enemyX = 530;
@@ -61,16 +65,15 @@ public class BattleScreen extends Screen {
 
     @Override
     public void initialize() {
-        playerHP = new SpriteFont("BOBCAT | 100 HP", 15, 15, "Trebuchet MS", 22, Color.black);
-        enemyHP = new SpriteFont("ENEMY | 150 HP", 600, 15, "Trebuchet MS", 22, Color.black);
+        playerHP = new SpriteFont("BOBCAT | " + GamePanel.health + " HP", 15, 15, "Trebuchet MS", 22, Color.white);
+        enemyHP = new SpriteFont("ENEMY | " + GamePanel.bossHealth + " HP", 600, 15, "Trebuchet MS", 22, Color.white);
         rectangle = new Rectangle();
-        coleHealth = 150;
-        bobcatHealth = 100;
         keyLocker.lockKey(Key.SPACE);
         keyLocker.lockKey(Key.Y);
-
         int initialY = 430; 
         int ySpacing = 50;
+        //Sound warriorMusic = new Sound("spear-of-justice.wav", false);
+        //warriorMusic.play();
         
     // Initialize attack options
         attackOptions = new ArrayList<>();
@@ -110,26 +113,57 @@ public class BattleScreen extends Screen {
         } else {
             if (Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER)) {
                 String attackName = attackOptions.get(selectedAttack).getText();
-                int damage = 0;
+                
 
                 // Determine damage based on the selected attack
                 if (selectedAttack == 0) {
-                    attackMessage.setText("Bobcat used HEAVY attack!!!");
-                    damage = 20; 
+                    attackMessage.setText("Bobcat used HEAVY Attack!!!");
+                    Battle.CatMove = NextMove.HEAVY;
+                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    if (Battle.CatTakesDamage == true)
+                    {
+                        GamePanel.health -= 10;
+                        playerHP.setText("BOBCAT | " + GamePanel.health + " HP");
+                    }
+                    else if (Battle.BossTakesDamage == true)
+                    {
+                        GamePanel.bossHealth -= 10;
+                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth + " HP");
+                    }
+                    WarriorMoves.WarriorAI(NextMove.HEAVY); 
                 } else if (selectedAttack == 1) {
-                    attackMessage.setText("Bobcat used LIGHT attack!!!");
-                    damage = 10; 
+                    attackMessage.setText("Bobcat used LIGHT Attack!!!");
+                    Battle.CatMove = NextMove.LIGHT;
+                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    if (Battle.CatTakesDamage == true)
+                    {
+                        GamePanel.health -= 10;
+                        playerHP.setText("BOBCAT | " + GamePanel.health + " HP");
+                    }
+                    else if (Battle.BossTakesDamage == true)
+                    {
+                        GamePanel.bossHealth -= 10;
+                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth + " HP");
+                    }
+                    WarriorMoves.WarriorAI(NextMove.LIGHT);
                 } else if (selectedAttack == 2) {
                     attackMessage.setText("Bobcat used DEFEND!!!");
-                
+                    Battle.CatMove = NextMove.DEFEND;
+                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    if (Battle.CatTakesDamage == true)
+                    {
+                        GamePanel.health -= 10;
+                        playerHP.setText("BOBCAT | " + GamePanel.health + " HP");
+                    }
+                    if (Battle.BossTakesDamage == true)
+                    {
+                        GamePanel.bossHealth -= 10;
+                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth + " HP");
+                    }
+                    WarriorMoves.WarriorAI(NextMove.DEFEND);
                 }
-
-               
-                bobcatHealth -= damage;
-                
-                bobcatHealth = Math.max(0, bobcatHealth - damage);
-                
-                enemyHP.setText("ENEMY | " + bobcatHealth + " HP");
+                //playerHP.setText("BOBCAT | " + bobcatHealth + " HP");
+                //enemyHP.setText("ENEMY | " + enemyHealth + " HP");
 
                 attackMessageTimer = System.currentTimeMillis();
                 keyLocker.lockKey(Key.ENTER);
