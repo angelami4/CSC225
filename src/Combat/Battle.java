@@ -7,14 +7,14 @@ public class Battle
 {
     public static NextMove CatMove = NextMove.NO_MOVE;
     public static NextMove BossMove = NextMove.NO_MOVE;
-    public static int CatHealth = 100;
+    //public static int CatHealth = BattleScreen.bobcatHealth;
     public static int damage = 10;
     public static boolean CatTakesDamage;
     public static boolean BossTakesDamage;
     
     public static void Fight(int bosshealth, int bossDamage)
     {
-        BattleScreen.enemyHealth = bosshealth;
+        //BattleScreen.enemyHealth = bosshealth;
 
         CatTakesDamage = false;
         BossTakesDamage = false;
@@ -29,7 +29,6 @@ public class Battle
             }
             else if(BossMove == NextMove.LIGHT)
             {
-                CatHealth -= damage;
                 CatTakesDamage = true;
                 System.out.println("Boss wins");
             }
@@ -67,11 +66,9 @@ public class Battle
             }
             else if(BossMove == NextMove.HEAVY)
             {
-                CatHealth -= damage;
                 CatTakesDamage = true;
                 System.out.println("Boss wins");
             }
         }
     }
-
 }

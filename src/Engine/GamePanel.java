@@ -166,24 +166,24 @@ public class GamePanel extends JPanel {
 				item2.setY(95);
 				item3.setY(125);
 				infoLabel.setText("Pepsi drank! Gained 5 HP");
-				health += 5;
-				healthLabel.setText(health + "/100 HP");
-				keyLocker.lockKey(Key.ENTER);
+				// health += 5;
+				// healthLabel.setText(health + "/100 HP");
+				// keyLocker.lockKey(Key.ENTER);
             } 
 			else if (menuItemSelected == 2) {
 				keyPressTimer = 100;
 				item2.remove();
 				item3.setY(125);
 				infoLabel.setText("Hot Dog eaten! Gained 10 HP");
-				health += 10;
-				healthLabel.setText(health + "/100 HP");
+				// health += 10;
+				// healthLabel.setText(health + "/100 HP");
             } 
 			else if (menuItemSelected == 3){
 				keyPressTimer = 100;
 				item3.remove();
 				infoLabel.setText("Nachos eaten! Gained 20 HP");
-				health += 20;
-				healthLabel.setText(health + "/100 HP");
+				// health += 20;
+				// healthLabel.setText(health + "/100 HP");
 			}
         }
 		if (!isGamePaused) {
@@ -259,4 +259,5 @@ public class GamePanel extends JPanel {
 		graphicsHandler.setGraphics((Graphics2D) g);
 		draw();
 	}
+
 }

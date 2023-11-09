@@ -4,9 +4,9 @@ import Engine.*;
 import Game.ScreenCoordinator;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
-import Utils.Sound;
-import Maps.TestMap;
-import Game.GameState;
+//import Utils.Sound;
+//import Maps.TestMap;
+//import Game.GameState;
 import Combat.Battle;
 import Combat.NextMove;
 import Combat.WarriorMoves;
@@ -30,8 +30,9 @@ public class BattleScreen extends Screen {
     protected Rectangle rectangle;
     protected GraphicsHandler graphicsHandler;
     protected ScreenCoordinator screenCoordinator;
-    public static int enemyHealth = 90;
-    public static int bobcatHealth;
+    //public int health = GamePanel.health;
+    public int enemyHealth = 90;
+    //public static int bobcatHealth = GamePanel.health;
 
     protected List<SpriteFont> attackOptions;
     protected int selectedAttack;
@@ -44,7 +45,6 @@ public class BattleScreen extends Screen {
     protected BufferedImage backgroundImage; 
     protected BufferedImage playerImage;
     protected BufferedImage enemyImage;
-    protected int health = GamePanel.health;
     protected int playerX = 20;
     protected int playerY = 100;
     protected int enemyX = 530;
@@ -64,8 +64,8 @@ public class BattleScreen extends Screen {
 
     @Override
     public void initialize() {
-        bobcatHealth = health;
-        playerHP = new SpriteFont("BOBCAT | " + bobcatHealth + " HP", 15, 15, "Trebuchet MS", 22, Color.white);
+        //bobcatHealth = health;
+        playerHP = new SpriteFont("BOBCAT | " + GamePanel.health + " HP", 15, 15, "Trebuchet MS", 22, Color.white);
         enemyHP = new SpriteFont("ENEMY | " + enemyHealth + " HP", 600, 15, "Trebuchet MS", 22, Color.white);
         rectangle = new Rectangle();
         keyLocker.lockKey(Key.SPACE);
@@ -120,7 +120,8 @@ public class BattleScreen extends Screen {
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)
                     {
-                        bobcatHealth = bobcatHealth - 10;
+                        GamePanel.health -= 10;
+                        playerHP.setText("BOBCAT | " + GamePanel.health + " HP");
                     }
                     else if (Battle.BossTakesDamage == true)
                     {
@@ -133,7 +134,8 @@ public class BattleScreen extends Screen {
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)
                     {
-                        bobcatHealth = bobcatHealth - 10;
+                        GamePanel.health -= 10;
+                        playerHP.setText("BOBCAT | " + GamePanel.health + " HP");
                     }
                     else if (Battle.BossTakesDamage == true)
                     {
@@ -146,7 +148,8 @@ public class BattleScreen extends Screen {
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)
                     {
-                        bobcatHealth = bobcatHealth - 10;
+                        GamePanel.health -= 10;
+                        playerHP.setText("BOBCAT | " + GamePanel.health + " HP");
                     }
                     if (Battle.BossTakesDamage == true)
                     {
