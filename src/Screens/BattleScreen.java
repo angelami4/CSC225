@@ -43,7 +43,7 @@ public class BattleScreen extends Screen {
     protected BufferedImage enemyImage;
 
     protected int playerX = 20;
-    protected int playerY = 100;
+    protected int playerY = 150;
     protected int enemyX = 530;
     protected int enemyY = 150;
 
@@ -51,8 +51,8 @@ public class BattleScreen extends Screen {
         this.screenCoordinator = screenCoordinator;
         initialize();
         try {
-            backgroundImage = ImageIO.read(new File("Resources/rink.jpg")); 
-            playerImage = ImageIO.read(new File("Resources/happi.gif")); 
+            backgroundImage = ImageIO.read(new File("Resources/rink.png")); 
+            playerImage = ImageIO.read(new File("Resources/b0bcat.png")); 
             enemyImage = ImageIO.read(new File("Resources/b2.png")); 
         } catch (IOException e) {
             e.printStackTrace();
