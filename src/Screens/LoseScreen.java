@@ -27,7 +27,7 @@ public class LoseScreen extends Screen {
 
     @Override
     public void initialize() {
-        loseMessage = new SpriteFont("You Died, Press Escape.", 70, 200, "Trebuchet MS", 60, Color.black);
+        loseMessage = new SpriteFont("You Died, Press Escape.", 70, 200, "Lato", 60, Color.black);
        // poopMessage = new SpriteFont("Press Escape To go To main Menu, Press space to reset ", 300, 200, "Trebuchet MS", 60, Color.black);
         
   
