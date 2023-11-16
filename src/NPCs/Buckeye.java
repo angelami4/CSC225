@@ -12,8 +12,8 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-public class Enemy2 extends NPC {
-    public Enemy2(int id, Point location) {
+public class Buckeye extends NPC {
+    public Buckeye(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Walrus.png"), 24, 24), "STAND_LEFT");
     }
 
