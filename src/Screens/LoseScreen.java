@@ -3,8 +3,8 @@ package Screens;
 import Engine.*;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
-import Utils.Sound;
-import Maps.TestMap;
+// import Utils.Sound;
+// import Maps.TestMap;
 
 import java.awt.*;
 
@@ -19,6 +19,7 @@ public class LoseScreen extends Screen {
     protected PlayLevelScreen playLevelScreen;
     protected Rectangle rectangle;
     protected GraphicsHandler graphicsHandler;
+    //Sound gameOver = new Sound("game over.wav", false);
 
     public LoseScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
@@ -29,7 +30,7 @@ public class LoseScreen extends Screen {
     public void initialize() {
         loseMessage = new SpriteFont("You Died, Press Escape.", 70, 200, "Lato", 60, Color.black);
        // poopMessage = new SpriteFont("Press Escape To go To main Menu, Press space to reset ", 300, 200, "Trebuchet MS", 60, Color.black);
-        
+        //gameOver.play();
   
      
         keyLocker.lockKey(Key.SPACE);

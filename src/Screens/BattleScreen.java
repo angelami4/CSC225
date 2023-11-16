@@ -5,7 +5,7 @@ import Game.Game;
 import Game.ScreenCoordinator;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
-//import Utils.Sound;
+import Utils.Sound;
 //import Maps.TestMap;
 //import Game.GameState;
 import Combat.Battle;
@@ -47,7 +47,7 @@ public class BattleScreen extends Screen {
     protected BufferedImage playerImage;
     protected BufferedImage enemyImage;
     protected int playerX = 20;
-    protected int playerY = 100;
+    protected int playerY = 150;
     protected int enemyX = 530;
     protected int enemyY = 150;
 
@@ -55,8 +55,8 @@ public class BattleScreen extends Screen {
         this.screenCoordinator = screenCoordinator;
         initialize();
         try {
-            backgroundImage = ImageIO.read(new File("Resources/rink.jpg")); 
-            playerImage = ImageIO.read(new File("Resources/happi.gif")); 
+            backgroundImage = ImageIO.read(new File("Resources/rink.png")); 
+            playerImage = ImageIO.read(new File("Resources/b0bcat.png")); 
             enemyImage = ImageIO.read(new File("Resources/b2.png")); 
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,6 +72,8 @@ public class BattleScreen extends Screen {
         keyLocker.lockKey(Key.Y);
         int initialY = 430; 
         int ySpacing = 50;
+        //Sound warriorMusic = new Sound("spear-of-justice.wav", false);
+        //warriorMusic.play();
         
     // Initialize attack options
         attackOptions = new ArrayList<>();
@@ -79,7 +81,7 @@ public class BattleScreen extends Screen {
         attackOptions.add(new SpriteFont("LIGHT", 50, initialY + ySpacing, "Trebuchet MS", 22, Color.black));
         attackOptions.add(new SpriteFont("DEFEND", 50, initialY + 2 * ySpacing, "Trebuchet MS", 22, Color.black));
         selectedAttack = 0;
-        attackMessage = new SpriteFont("", 300, 250, "Trebuchet MS", 30, Color.black);
+        attackMessage = new SpriteFont("", 250, 151, "Trebuchet MS", 30, Color.white);
     }
 
     //add action listener so buttons can be pressed
@@ -107,6 +109,7 @@ public class BattleScreen extends Screen {
         } else if (!fightMessageDisplayed) {  
             fightMessageDisplayed = true;
             attackMessage.setText("FIGHT!");
+            attackMessage.setX(350);
             attackMessageTimer = System.currentTimeMillis();
         } else {
             if (Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER)) {
@@ -116,6 +119,7 @@ public class BattleScreen extends Screen {
                 // Determine damage based on the selected attack
                 if (selectedAttack == 0) {
                     attackMessage.setText("Bobcat used HEAVY Attack!!!");
+                    attackMessage.setX(200);
                     Battle.CatMove = NextMove.HEAVY;
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)
@@ -131,6 +135,7 @@ public class BattleScreen extends Screen {
                     WarriorMoves.WarriorAI(NextMove.HEAVY); 
                 } else if (selectedAttack == 1) {
                     attackMessage.setText("Bobcat used LIGHT Attack!!!");
+                    attackMessage.setX(200);
                     Battle.CatMove = NextMove.LIGHT;
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)
@@ -146,6 +151,7 @@ public class BattleScreen extends Screen {
                     WarriorMoves.WarriorAI(NextMove.LIGHT);
                 } else if (selectedAttack == 2) {
                     attackMessage.setText("Bobcat used DEFEND!!!");
+                    attackMessage.setX(200);
                     Battle.CatMove = NextMove.DEFEND;
                     Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
                     if (Battle.CatTakesDamage == true)

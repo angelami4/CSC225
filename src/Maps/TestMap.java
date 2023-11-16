@@ -33,7 +33,7 @@ public class TestMap extends Map {
         this.playerStartPosition = getMapTile(17, 20).getLocation();
     }
 
-    @Override
+   /*/ @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
@@ -41,7 +41,7 @@ public class TestMap extends Map {
         //enhancedMapTiles.add(pushableRock);
 
         return enhancedMapTiles;
-    }
+    }*/
 
     @Override
     public ArrayList<NPC> loadNPCs() {

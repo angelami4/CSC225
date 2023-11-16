@@ -1,3 +1,4 @@
+
 package NPCs;
 
 import Builders.FrameBuilder;

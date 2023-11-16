@@ -651,6 +651,47 @@ public class CommonTileset extends Tileset {
 
         mapTiles.add(bobcat29Tile);
 
+        
+                
+        Frame bobcat32Frame = new FrameBuilder(getSubImage(14, 0))
+        .withScale(tileScale)
+        .build();
+
+        MapTileBuilder bobcat32Tile = new MapTileBuilder(bobcat32Frame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(bobcat32Tile);
+                        
+        Frame bobcat33Frame = new FrameBuilder(getSubImage(14, 1))
+        .withScale(tileScale)
+        .build();
+
+        MapTileBuilder bobcat33Tile = new MapTileBuilder(bobcat33Frame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(bobcat33Tile);
+
+                        
+        Frame bobcat34Frame = new FrameBuilder(getSubImage(15, 0))
+        .withScale(tileScale)
+        .build();
+
+        MapTileBuilder bobcat34Tile = new MapTileBuilder(bobcat34Frame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(bobcat34Tile);
+        
+
+                        
+        Frame bobcat35Frame = new FrameBuilder(getSubImage(15, 1))
+        .withScale(tileScale)
+        .build();
+
+        MapTileBuilder bobcat35Tile = new MapTileBuilder(bobcat35Frame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(bobcat35Tile);
+
 
 
 
