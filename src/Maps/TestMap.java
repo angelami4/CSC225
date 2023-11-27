@@ -7,7 +7,7 @@ import Level.NPC;
 import Level.Item;
 import Level.Trigger;
 import NPCs.Dinosaur;
-import NPCs.Enemy1;
+import NPCs.Buckeye;
 import NPCs.Buckeye;
 import NPCs.Walrus;
 //import NPCs.TrophyNPC;
@@ -51,7 +51,7 @@ public class TestMap extends Map {
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
 
-        Enemy1 enemy1 = new Enemy1(1, getMapTile(10, 18).getLocation().subtractY(40));
+        Buckeye enemy1 = new Buckeye(1, getMapTile(10, 18).getLocation().subtractY(40));
         walrus.setInteractScript(new WalrusScript());
         npcs.add(enemy1);
 
