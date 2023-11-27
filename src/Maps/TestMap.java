@@ -7,13 +7,13 @@ import Level.NPC;
 import Level.Item;
 import Level.Trigger;
 import NPCs.Dinosaur;
-import NPCs.Enemy1;
-import NPCs.Enemy2;
+import NPCs.Buckeye;
+import NPCs.Buckeye;
 import NPCs.Walrus;
 //import NPCs.TrophyNPC;
 import Items.*;
 import Scripts.TestMap.TrophyScript;
-import Scripts.TestMap.Enemy1Script;
+import Scripts.TestMap.BuckeyeScript;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
@@ -50,13 +50,10 @@ public class TestMap extends Map {
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
 
-        Enemy1 enemy1 = new Enemy1(1, getMapTile(10, 18).getLocation().subtractY(40));
-        walrus.setInteractScript(new WalrusScript());
-        npcs.add(enemy1);
 
-        Enemy2 enemy2 = new Enemy2(1, getMapTile(10, 20).getLocation().subtractY(40));
-        walrus.setInteractScript(new WalrusScript());
-        npcs.add(enemy2);
+        Buckeye buckeye = new Buckeye(1, getMapTile(10, 20).getLocation().subtractY(40));
+        buckeye.setInteractScript(new BuckeyeScript());
+        npcs.add(buckeye);
 
         Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
         dinosaur.setExistenceFlag("hasTalkedToDinosaur");

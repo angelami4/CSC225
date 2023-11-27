@@ -7,17 +7,20 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.NPC;
+import Level.Player;
 import Utils.Point;
 
 import java.util.HashMap;
 
-public class Warrior extends NPC
-{
-    public int health = 90;
+// This class is for the walrus NPC
+public class Warrior extends NPC {
 
-    public Warrior(int id, Point location)
-    {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Dinosaur.png"), 14, 17), "STAND_LEFT");
+    public Warrior(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("b1.png"), 24, 24), "STAND_LEFT");
+    }
+
+    public void update(Player player) {
+        super.update(player);
     }
 
     @Override
@@ -26,19 +29,19 @@ public class Warrior extends NPC
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(4, 5, 5, 10)
-                            .build()
-            });
+                            .withBounds(7, 13, 11, 7) 
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL) 
+                            .build() 
+            }); 
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
                            .withScale(3)
-                           .withBounds(4, 5, 5, 10)
-                           .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                           .build()
-           }); 
+                           .withBounds(7, 13, 11, 7)
+                           .build() 
+           });
         }};
     }
-
+ 
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
