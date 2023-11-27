@@ -13,7 +13,6 @@ import NPCs.Walrus;
 //import NPCs.TrophyNPC;
 import Items.*;
 import Scripts.TestMap.TrophyScript;
-import Scripts.TestMap.Enemy1Script;
 import Scripts.TestMap.BuckeyeScript;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
@@ -51,9 +50,6 @@ public class TestMap extends Map {
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
 
-        Buckeye enemy1 = new Buckeye(1, getMapTile(10, 18).getLocation().subtractY(40));
-        walrus.setInteractScript(new WalrusScript());
-        npcs.add(enemy1);
 
         Buckeye buckeye = new Buckeye(1, getMapTile(10, 20).getLocation().subtractY(40));
         buckeye.setInteractScript(new BuckeyeScript());
