@@ -153,9 +153,9 @@ public class PlayLevelScreen extends Screen {
               playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
               //gameOver.play();
             } 
-            //if(GamePanel.bossHealth <= 0){
-              //  playLevelScreenState = PlayLevelScreenState.LEVEL_WIN;
-            //}
+            if(GamePanel.bossHealth <= 0){
+                playLevelScreenState = PlayLevelScreenState.RUNNING;
+            }
         }
     }
 

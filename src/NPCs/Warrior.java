@@ -17,7 +17,7 @@ public class Warrior extends NPC
 
     public Warrior(int id, Point location)
     {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Dinosaur.png"), 14, 17), "STAND_LEFT");
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("b1.png"), 14, 17), "STAND_LEFT");
     }
 
     @Override
