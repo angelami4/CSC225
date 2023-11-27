@@ -5,7 +5,7 @@ import Level.Script;
 import Level.ScriptState;
 
 // script for talking to walrus npc
-public class GooferScript extends Script<NPC> {
+public class WolverineScript extends Script<NPC> {
 
     @Override
     protected void setup() {
@@ -13,15 +13,15 @@ public class GooferScript extends Script<NPC> {
         showTextbox();
 
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
-        if (isFlagSet("hasTalkedToWolverine")) {
-            addTextToTextboxQueue( "Goofer: THIS IS GONNA BE CAKE");
-            addTextToTextboxQueue( "Goofer: MOST OVERRATED TEAM IN THE EAST");
-            addTextToTextboxQueue( "Goofer: SEE YOU ON THE ICE");
+        if (isFlagSet("hasTalkedToBuckeye")) {
+            addTextToTextboxQueue( "Wolverine: Stupid Bobcat, Your about to get CLAWED! ");
+            addTextToTextboxQueue( "Bobcat: I'd like to see you try we're far to fast for you ");
+            addTextToTextboxQueue( "Wolverine: ENOUGH TALKING LET'S HIT THE ICE.");
 
           //  addTextToTextboxQueue( "Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
         }
         else {
-            addTextToTextboxQueue( "You Must Battle with the Michigan Wolverine Before ME!");
+            addTextToTextboxQueue( "You Must Battle with the Ohio Buckeye Before ME!");
         }
         entity.facePlayer(player);
     }
@@ -32,7 +32,7 @@ public class GooferScript extends Script<NPC> {
         hideTextbox();
 
         // set flag so that if walrus is talked to again after the first time, what he says changes
-      //  setFlag("hasTalkedToWolverine");
+        //setFlag("hasTalkedToBuckeye");
     }
 
     @Override
