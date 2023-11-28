@@ -34,8 +34,10 @@ public class PlayLevelScreen extends Screen {
     protected int enemyHealth;
     Sound background = new Sound("ruins.wav", true);
     Sound fightStart = new Sound("fight!.wav", false);
-    // Sound warriorMusic = new Sound("spear-of-justice.wav", false);
-    // Sound gameOver = new Sound("game over.wav", false);
+    Sound warriorMusic = new Sound("dummy!.wav", false);
+    Sound gameOver = new Sound("game-over.wav", false);
+    Sound fightWin = new Sound("fight-win.wav", false);
+    Sound warriorTaunt = new Sound("ganon-chuckle.wav", true);
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -118,6 +120,7 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:
                 player.update();
                 background.play();
+                warriorMusic.pause();
                 map.update(player);
                 if(isGamePaused){
                     playLevelScreenState = PlayLevelScreenState.INVENTORY;
@@ -128,17 +131,23 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_LOSE:
                 loseScreen.update();
                 background.pause();
-                //gameOver.play();
+                warriorMusic.pause();
+                warriorTaunt.pause();
+                gameOver.play();
                 break;
             case LEVEL_WIN:
                 winScreen.update();
                 background.pause();
+                warriorMusic.pause();
+                warriorTaunt.pause();
+                fightWin.play();
                 break;
               case BATTLE_ACTIVATE:
                 battleScreen.update();
                 background.pause();
                 fightStart.play();
-                //warriorMusic.play();
+                warriorMusic.play();
+                warriorTaunt.play();
                 break;
             case INVENTORY:
                 inventoryScreen.update();
