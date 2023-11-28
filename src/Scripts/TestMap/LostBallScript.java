@@ -9,7 +9,7 @@ public class LostBallScript extends Script {
     protected void setup() {
         lockPlayer();
         showTextbox();
-        addTextToTextboxQueue("Welcome, I'm Coach if you need help !\n with how to play go back to instructions. ");
+        addTextToTextboxQueue("Welcome, I'm Coach if you need help \n with how to play go back to instructions. ");
         addTextToTextboxQueue("You are going to defeat the final four schools !\nand get us that trophy. ");
         addTextToTextboxQueue( "We are yet to get a championship !\n and this is our year. ");
         addTextToTextboxQueue( "It's all up to you, first gather some !\n supplies then head into the rink with our first opponent. ");
