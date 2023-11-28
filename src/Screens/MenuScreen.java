@@ -30,19 +30,19 @@ public class MenuScreen extends Screen {
 
     @Override
     public void initialize() {
-        playGame = new SpriteFont("PLAY GAME", 200, 169, "Trebuchet MS", 30, new Color(49, 207, 240));
+        playGame = new SpriteFont("PLAY GAME", 200, 169, "Verdana", 30, new Color(49, 207, 240));
         playGame.setOutlineColor(Color.black);
         playGame.setOutlineThickness(3);
-        credits = new SpriteFont("CREDITS", 200, 219, "Trebuchet MS", 30, new Color(49, 207, 240));
+        credits = new SpriteFont("CREDITS", 200, 219, "Verdana", 30, new Color(49, 207, 240));
         credits.setOutlineColor(Color.black);
-        instructions = new SpriteFont("INSTRUCTIONS", 200, 269, "Trebuchet MS", 30, new Color(255, 255,255 ));
+        instructions = new SpriteFont("INSTRUCTIONS", 200, 269, "Verdana", 30, new Color(255, 255,255 ));
         instructions.setOutlineColor(Color.black);
         instructions.setOutlineThickness(3);
         credits.setOutlineThickness(3);
-        title = new SpriteFont("THE ROAD TO VICTORY", 100, 40, "Impact", 60, new Color(200, 0, 0));
+        title = new SpriteFont(" THE  ROAD  TO  VICTORY", 120, 70, "IMPACT", 60, new Color(34, 3, 170));
         title.setOutlineColor(Color.black);
         title.setOutlineThickness(3);
-        info = new SpriteFont("Use Space Key for Selections", 30, 540, "Trebuchet MS", 20, new Color(200, 0, 200));
+        info = new SpriteFont("Use Enter Key for Selections", 30, 540, "Verdana", 20, new Color(200, 0, 200));
         info.setOutlineColor(Color.black);
         info.setOutlineThickness(2);
         background = new TitleScreenMap();
@@ -99,10 +99,10 @@ public class MenuScreen extends Screen {
         }
 
         // if enter is pressed on menu item, change to appropriate screen based on which menu item was chosen
-        if (Keyboard.isKeyUp(Key.SPACE)) {
-            keyLocker.unlockKey(Key.SPACE);
+        if (Keyboard.isKeyUp(Key.ENTER)) {
+            keyLocker.unlockKey(Key.ENTER);
         }
-        if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
+        if (!keyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyDown(Key.ENTER)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
                 screenCoordinator.setGameState(GameState.LEVEL);
