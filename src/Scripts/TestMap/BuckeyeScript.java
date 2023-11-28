@@ -14,8 +14,10 @@ public class BuckeyeScript extends Script<NPC> {
 
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (isFlagSet("hasTalkedToWarrior")) {
-            addTextToTextboxQueue( "Buckeye: YOU THINK THIS GON BE EASY?");
-            addTextToTextboxQueue( "Bobcat: Let's just calm down n skate");
+            addTextToTextboxQueue( "Buckeye: YOU THINK THIS GON BE EASY? ");
+            addTextToTextboxQueue( "Buckeye: Just Cause im from Ohio? ");
+            addTextToTextboxQueue( "Buckeye: Well you thought wrong! ");
+            addTextToTextboxQueue( "Bobcat: Let's just calm down n skate ");
             addTextToTextboxQueue( "Buckeye: NA ");
             addTextToTextboxQueue( "Buckeye: You're BOUTTA GET CRACKED ");
 

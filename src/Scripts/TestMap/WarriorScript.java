@@ -14,9 +14,9 @@ public class WarriorScript extends Script<NPC> {
 
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToWalrus")) {
-            addTextToTextboxQueue( "Bobcat: What are you doing on my rink!?!!?");
-            addTextToTextboxQueue( "Merrimack: IT SHALL BE MINE MWUHAHAHA");
-            addTextToTextboxQueue( "Bobcat: GRRRRRR");
+            addTextToTextboxQueue( "Bobcat: What are you doing on my rink!?!!? ");
+            addTextToTextboxQueue( "Merrimack: IT SHALL BE MINE MWUHAHAHA ");
+            addTextToTextboxQueue( "Bobcat: GRRRRRR ");
 
         }
     }

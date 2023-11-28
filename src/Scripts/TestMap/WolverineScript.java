@@ -16,7 +16,7 @@ public class WolverineScript extends Script<NPC> {
         if (isFlagSet("hasTalkedToBuckeye")) {
             addTextToTextboxQueue( "Wolverine: Stupid Bobcat, Your about to get CLAWED! ");
             addTextToTextboxQueue( "Bobcat: I'd like to see you try we're far to fast for you ");
-            addTextToTextboxQueue( "Wolverine: ENOUGH TALKING LET'S HIT THE ICE.");
+            addTextToTextboxQueue( "Wolverine: ENOUGH TALKING LET'S HIT THE ICE. ");
 
           //  addTextToTextboxQueue( "Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
         }
