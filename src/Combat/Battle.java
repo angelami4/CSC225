@@ -1,7 +1,7 @@
 package Combat;
 
 
-import Screens.BattleScreen;
+//import Screens.BattleScreen;
 
 public class Battle 
 {
@@ -12,7 +12,7 @@ public class Battle
     public static boolean CatTakesDamage;
     public static boolean BossTakesDamage;
     
-    public static void Fight(int bosshealth, int bossDamage)
+    public static void Fight()
     {
         //BattleScreen.enemyHealth = bosshealth;
 
@@ -23,7 +23,7 @@ public class Battle
         {
             if(BossMove == NextMove.DEFEND)
             {
-                WarriorMoves.WarriorHP -= damage;
+                //WarriorMoves.WarriorHP -= damage;
                 BossTakesDamage = true;
                 System.out.println("Cat wins");
             }
@@ -49,7 +49,7 @@ public class Battle
             } 
             else if(BossMove == NextMove.HEAVY)
             {
-                WarriorMoves.WarriorHP -= damage;
+                //WarriorMoves.WarriorHP -= damage;
                 BossTakesDamage = true;
                 System.out.println("Cat wins");
             }

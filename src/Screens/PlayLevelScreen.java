@@ -26,6 +26,9 @@ public class PlayLevelScreen extends Screen {
     protected WinScreen winScreen;
     protected LoseScreen loseScreen;
     protected BattleScreen battleScreen;
+    protected BattleScreen2 battleScreen2;
+    protected BattleScreen3 battleScreen3;
+    protected BattleScreen4 battleScreen4;
     protected InventoryScreen inventoryScreen;
     protected FlagManager flagManager;
     protected int health = GamePanel.health;
@@ -131,11 +134,24 @@ public class PlayLevelScreen extends Screen {
                 winScreen.update();
                 background.pause();
                 break;
-              case BATTLE_ACTIVATE:
+            case BATTLE_ACTIVATE:
                 battleScreen.update();
                 background.pause();
                 fightStart.play();
                 //warriorMusic.play();
+                break;
+            case BATTLE2_ACTIVATE:
+                battleScreen2.update();
+                background.pause();
+                //fightStart.play();
+                break;
+            case BATTLE3_ACTIVATE:
+                battleScreen3.update();
+                background.pause();
+                break;
+            case BATTLE4_ACTIVATE:
+                battleScreen4.update();
+                background.pause();
                 break;
             case INVENTORY:
                 inventoryScreen.update();
@@ -171,8 +187,17 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_WIN:
                 winScreen.draw(graphicsHandler);
                 break;
-              case BATTLE_ACTIVATE:
+            case BATTLE_ACTIVATE:
                 battleScreen.draw(graphicsHandler);
+                break;
+            case BATTLE2_ACTIVATE:
+                battleScreen2.draw(graphicsHandler);
+                break;
+            case BATTLE3_ACTIVATE:
+                battleScreen3.draw(graphicsHandler);
+                break;
+            case BATTLE4_ACTIVATE:
+                battleScreen4.draw(graphicsHandler);
                 break;
             case INVENTORY:
                 inventoryScreen.draw(graphicsHandler);
@@ -211,6 +236,6 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     public enum PlayLevelScreenState {
-        RUNNING, LEVEL_LOSE, BATTLE_ACTIVATE, INVENTORY, LEVEL_WIN
+        RUNNING, LEVEL_LOSE, BATTLE_ACTIVATE, BATTLE2_ACTIVATE, BATTLE3_ACTIVATE, BATTLE4_ACTIVATE, INVENTORY, LEVEL_WIN
     }
 }
