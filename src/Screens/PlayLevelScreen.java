@@ -51,8 +51,11 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToDinosaur", false);
         flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasTouchedTrophy", false);
-        flagManager.addFlag("hasTalkedToEnemy1", false);
-        background.play();
+        flagManager.addFlag("hasTalkedToWarrior", false);
+         flagManager.addFlag("hasTalkedToBuckeye", false);
+         flagManager.addFlag("hasTalkedToGoofer", false);
+         flagManager.addFlag("hasTalkedToWolverine", false);
+         background.play();
         battleScreen = new BattleScreen(this.screenCoordinator);
         bobcatHealth = health;
         // define/setup map
@@ -163,7 +166,7 @@ public class PlayLevelScreen extends Screen {
               //gameOver.play();
             } 
             if(GamePanel.bossHealth <= 0){
-                playLevelScreenState = PlayLevelScreenState.LEVEL_WIN;
+                playLevelScreenState = PlayLevelScreenState.RUNNING;
             }
         }
     }

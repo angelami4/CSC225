@@ -12,9 +12,9 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-public class Enemy2 extends NPC {
-    public Enemy2(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("b3.png"), 24, 24), "STAND_LEFT");
+public class Buckeye extends NPC {
+    public Buckeye(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("b4.png"), 24, 24), "STAND_LEFT");
     }
 
     public void update(Player player) {
@@ -26,7 +26,7 @@ public class Enemy2 extends NPC {
         return new HashMap<String, Frame[]>() {{
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(3)
+                            .withScale(3) 
                             .withBounds(7, 13, 11, 7) 
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL) 
                             .build() 
@@ -45,5 +45,4 @@ public class Enemy2 extends NPC {
         super.draw(graphicsHandler);
     }
 }
-
 
