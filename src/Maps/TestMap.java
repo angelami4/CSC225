@@ -10,6 +10,7 @@ import NPCs.Dinosaur;
 import NPCs.Buckeye;
 import NPCs.Buckeye;
 import NPCs.Walrus;
+import NPCs.Transition;
 //import NPCs.TrophyNPC;
 import Items.*;
 import Scripts.TestMap.TrophyScript;
@@ -17,6 +18,7 @@ import Scripts.TestMap.BuckeyeScript;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
+import Scripts.TestMap.SwitchMap;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
@@ -59,6 +61,12 @@ public class TestMap extends Map {
         dinosaur.setExistenceFlag("hasTalkedToDinosaur");
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur);
+        
+        
+        Transition transition = new Transition(2, getMapTile(14, 5).getLocation());
+        transition.setExistenceFlag("transitionToFinalMap");
+        transition.setInteractScript(new SwitchMap());
+        npcs.add(transition); 
 
         //TrophyNPC trophynpc = new TrophyNPC(1, getMapTile(13, 17).getLocation());
         //trophynpc.setExistenceFlag("hasTouchedTrophy");

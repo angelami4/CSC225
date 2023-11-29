@@ -227,6 +227,10 @@ public abstract class Map{
         return mapTiles;
     }
 
+    public int mapTransition = 0;
+
+
+
     public void setMapTiles(MapTile[] mapTiles) {
         this.mapTiles = mapTiles;
     }
