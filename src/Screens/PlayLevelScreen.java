@@ -121,6 +121,7 @@ public class PlayLevelScreen extends Screen {
                 player.update();
                 background.play();
                 warriorMusic.pause();
+                warriorTaunt.pause();
                 map.update(player);
                 if(isGamePaused){
                     playLevelScreenState = PlayLevelScreenState.INVENTORY;
