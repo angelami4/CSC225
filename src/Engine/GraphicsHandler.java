@@ -48,6 +48,7 @@ public class GraphicsHandler {
         g.setColor(color);
         g.drawRect(x, y, width, height);
     }
+    
 
     public void drawRectangle(int x, int y, int width, int height, Color color, int borderThickness) {
         g.setStroke(new BasicStroke(borderThickness));

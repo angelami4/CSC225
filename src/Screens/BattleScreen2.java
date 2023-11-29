@@ -133,7 +133,7 @@ public class BattleScreen2 extends Screen
                     }
                     else if (Battle.BossTakesDamage == true)
                     {
-                        GamePanel.bossHealth -= 10;
+                        GamePanel.bossHealth2 -= 10;
                         enemyHP.setText("ENEMY | " + GamePanel.bossHealth2 + " HP");
                     } 
                 } else if (selectedAttack == 1) {
@@ -149,7 +149,7 @@ public class BattleScreen2 extends Screen
                     }
                     else if (Battle.BossTakesDamage == true)
                     {
-                        GamePanel.bossHealth -= 10;
+                        GamePanel.bossHealth2 -= 10;
                         enemyHP.setText("ENEMY | " + GamePanel.bossHealth2 + " HP");
                     }
                 } else if (selectedAttack == 2) {
@@ -165,7 +165,7 @@ public class BattleScreen2 extends Screen
                     }
                     if (Battle.BossTakesDamage == true)
                     {
-                        GamePanel.bossHealth -= 10;
+                        GamePanel.bossHealth2 -= 10;
                         enemyHP.setText("ENEMY | " + GamePanel.bossHealth2 + " HP");
                     }
                 }

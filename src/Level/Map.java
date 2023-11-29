@@ -9,6 +9,7 @@ import Utils.Point;
 import Utils.Sound;
 
 import java.applet.*;
+import java.awt.Graphics2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -604,4 +605,7 @@ public abstract class Map{
 
     public int getEndBoundX() { return endBoundX; }
     public int getEndBoundY() { return endBoundY; }
+
+    public void render(Graphics2D g2d) {
+    }
 }

@@ -6,6 +6,7 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
+import Game.Game;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
@@ -34,11 +35,17 @@ public class PlayLevelScreen extends Screen {
     protected int health = GamePanel.health;
     protected int bobcatHealth;
     private boolean isGamePaused;
+    public static boolean hasBeatenWarrior;
+    public static boolean hasBeatenBuckeye;
+    public static boolean hasBeatenWolverine;
+    public static boolean hasBeatenGopher;
     protected int enemyHealth;
     Sound background = new Sound("ruins.wav", true);
     Sound fightStart = new Sound("fight!.wav", false);
-    // Sound warriorMusic = new Sound("spear-of-justice.wav", false);
-    // Sound gameOver = new Sound("game over.wav", false);
+    Sound warriorMusic = new Sound("dummy!.wav", false);
+    Sound gameOver = new Sound("game-over.wav", false);
+    Sound fightWin = new Sound("fight-win.wav", false);
+    Sound warriorTaunt = new Sound("ganon-chuckle.wav", true);
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -52,9 +59,15 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToDinosaur", false);
         flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasTouchedTrophy", false);
-        flagManager.addFlag("hasTalkedToEnemy1", false);
-        background.play();
+        flagManager.addFlag("hasTalkedToWarrior", false);
+         flagManager.addFlag("hasTalkedToBuckeye", false);
+         flagManager.addFlag("hasTalkedToGoofer", false);
+         flagManager.addFlag("hasTalkedToWolverine", false);
+         background.play();
         battleScreen = new BattleScreen(this.screenCoordinator);
+        battleScreen2 = new BattleScreen2(this.screenCoordinator);
+        battleScreen3 = new BattleScreen3(this.screenCoordinator);
+        battleScreen4 = new BattleScreen4(this.screenCoordinator);
         bobcatHealth = health;
         // define/setup map
         this.map = new TestMap();
@@ -118,6 +131,7 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:
                 player.update();
                 background.play();
+                warriorMusic.pause();
                 map.update(player);
                 if(isGamePaused){
                     playLevelScreenState = PlayLevelScreenState.INVENTORY;
@@ -128,17 +142,23 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_LOSE:
                 loseScreen.update();
                 background.pause();
-                //gameOver.play();
+                warriorMusic.pause();
+                warriorTaunt.pause();
+                gameOver.play();
                 break;
             case LEVEL_WIN:
                 winScreen.update();
                 background.pause();
+                warriorMusic.pause();
+                warriorTaunt.pause();
+                fightWin.play();
                 break;
             case BATTLE_ACTIVATE:
                 battleScreen.update();
                 background.pause();
                 fightStart.play();
-                //warriorMusic.play();
+                warriorMusic.play();
+                warriorTaunt.play();
                 break;
             case BATTLE2_ACTIVATE:
                 battleScreen2.update();
@@ -162,16 +182,71 @@ public class PlayLevelScreen extends Screen {
        // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
          //   playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         //}
-
-         if (map.getFlagManager().isFlagSet("hasTalkedToWalrus")) {
+        if (hasBeatenWolverine == true && map.getFlagManager().isFlagSet("hasTalkedToWolverine"))
+        {
+            playLevelScreenState = PlayLevelScreenState.BATTLE4_ACTIVATE;
+            if(GamePanel.health <= 0) {
+                playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
+            }
+            if(GamePanel.bossHealth4 <= 0)
+            {
+                playLevelScreenState = PlayLevelScreenState.RUNNING;
+                //hasBeatenGopher = true;
+            }
+        }
+        else if (hasBeatenBuckeye == true && map.getFlagManager().isFlagSet("hasTalkedToBuckeye"))
+        {
+            playLevelScreenState = PlayLevelScreenState.BATTLE3_ACTIVATE;
+            if(GamePanel.health <= 0) {
+                playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
+            }
+            if(GamePanel.bossHealth3 <= 0)
+            {
+                playLevelScreenState = PlayLevelScreenState.RUNNING;
+                //hasBeatenWolverine = true;
+                //map.getFlagManager().setFlag("hasTalkedToGoofer");
+            }
+        }
+        else if (hasBeatenWarrior == true && map.getFlagManager().isFlagSet("hasTalkedToWarrior"))
+        {
+            playLevelScreenState = PlayLevelScreenState.BATTLE2_ACTIVATE;
+            if(GamePanel.health <= 0) {
+                playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
+            }
+            if(GamePanel.bossHealth2 <= 0)
+            {
+                playLevelScreenState = PlayLevelScreenState.RUNNING;
+                //hasBeatenBuckeye = true;
+                //map.getFlagManager().setFlag("hasTalkedToWolverine");
+            }
+        }
+        else if (map.getFlagManager().isFlagSet("hasTalkedToWalrus")) {
             playLevelScreenState = PlayLevelScreenState.BATTLE_ACTIVATE;
               if (GamePanel.health <= 0 ) {
               playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
               //gameOver.play();
             } 
             if(GamePanel.bossHealth <= 0){
-                playLevelScreenState = PlayLevelScreenState.LEVEL_WIN;
+                playLevelScreenState = PlayLevelScreenState.RUNNING;
+                //map.getFlagManager().setFlag("hasTalkedToBuckeye");
             }
+        }
+
+        if (GamePanel.bossHealth <= 0)
+        {
+            hasBeatenWarrior = true;
+        }
+        else if(GamePanel.bossHealth2 <= 0)
+        {
+            hasBeatenBuckeye = true;
+        }
+        else if(GamePanel.bossHealth3 <= 0)
+        {
+            hasBeatenWolverine = true;
+        }
+        else if(GamePanel.bossHealth4 <= 0)
+        {
+            hasBeatenGopher = true;
         }
     }
 
