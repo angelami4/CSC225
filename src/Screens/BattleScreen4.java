@@ -23,9 +23,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-//import Engine.GamePanel;
 
-public class BattleScreen extends Screen 
+public class BattleScreen4 extends Screen
 {
     protected SpriteFont playerHP;
     protected SpriteFont enemyHP;
@@ -55,7 +54,7 @@ public class BattleScreen extends Screen
     protected int enemyX = 530;
     protected int enemyY = 150;
 
-    public BattleScreen(ScreenCoordinator screenCoordinator) {
+    public BattleScreen4(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
         initialize();
         try {
@@ -70,7 +69,7 @@ public class BattleScreen extends Screen
     @Override
     public void initialize() {
         playerHP = new SpriteFont("BOBCAT | " + GamePanel.health + " HP", 15, 15, "Trebuchet MS", 22, Color.white);
-        enemyHP = new SpriteFont("ENEMY | " + GamePanel.bossHealth + " HP", 600, 15, "Trebuchet MS", 22, Color.white);
+        enemyHP = new SpriteFont("ENEMY | " + GamePanel.bossHealth4 + " HP", 600, 15, "Trebuchet MS", 22, Color.white);
         rectangle = new Rectangle();
         keyLocker.lockKey(Key.SPACE);
         keyLocker.lockKey(Key.Y);
@@ -125,6 +124,7 @@ public class BattleScreen extends Screen
                     attackMessage.setText("Bobcat used HEAVY Attack!!!");
                     attackMessage.setX(200);
                     Battle.CatMove = NextMove.HEAVY;
+                    GopherMoves.GopherAI();
                     Battle.Fight();
                     if (Battle.CatTakesDamage == true)
                     {
@@ -133,14 +133,14 @@ public class BattleScreen extends Screen
                     }
                     else if (Battle.BossTakesDamage == true)
                     {
-                        GamePanel.bossHealth -= 10;
-                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth + " HP");
-                    }
-                    WarriorMoves.WarriorAI(NextMove.HEAVY); 
+                        GamePanel.bossHealth4 -= 10;
+                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth4 + " HP");
+                    } 
                 } else if (selectedAttack == 1) {
                     attackMessage.setText("Bobcat used LIGHT Attack!!!");
                     attackMessage.setX(200);
                     Battle.CatMove = NextMove.LIGHT;
+                    GopherMoves.GopherAI();
                     Battle.Fight();
                     if (Battle.CatTakesDamage == true)
                     {
@@ -149,14 +149,14 @@ public class BattleScreen extends Screen
                     }
                     else if (Battle.BossTakesDamage == true)
                     {
-                        GamePanel.bossHealth -= 10;
-                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth + " HP");
+                        GamePanel.bossHealth4 -= 10;
+                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth4 + " HP");
                     }
-                    WarriorMoves.WarriorAI(NextMove.LIGHT);
                 } else if (selectedAttack == 2) {
                     attackMessage.setText("Bobcat used DEFEND!!!");
                     attackMessage.setX(200);
                     Battle.CatMove = NextMove.DEFEND;
+                    GopherMoves.GopherAI();
                     Battle.Fight();
                     if (Battle.CatTakesDamage == true)
                     {
@@ -165,10 +165,9 @@ public class BattleScreen extends Screen
                     }
                     if (Battle.BossTakesDamage == true)
                     {
-                        GamePanel.bossHealth -= 10;
-                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth + " HP");
+                        GamePanel.bossHealth4 -= 10;
+                        enemyHP.setText("ENEMY | " + GamePanel.bossHealth4 + " HP");
                     }
-                    WarriorMoves.WarriorAI(NextMove.DEFEND);
                 }
                 //playerHP.setText("BOBCAT | " + bobcatHealth + " HP");
                 //enemyHP.setText("ENEMY | " + enemyHealth + " HP");

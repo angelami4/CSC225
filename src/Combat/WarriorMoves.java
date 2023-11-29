@@ -2,9 +2,6 @@ package Combat;
 
 public class WarriorMoves 
 {
-    public static int WarriorHP = 90;
-    public static int WarriorDamage = 10;
-
     public static void WarriorAI(NextMove nextmove)
     {
         if (nextmove == NextMove.DEFEND)

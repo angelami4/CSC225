@@ -14,10 +14,10 @@ public class GooferScript extends Script<NPC> {
 
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (isFlagSet("hasTalkedToWolverine")) {
-            addTextToTextboxQueue( "Goofer: THIS IS GONNA BE CAKE");
-            addTextToTextboxQueue( "Bobcat: Cake is what we'll celebrate with");
-            addTextToTextboxQueue( "Goofer: MOST OVERRATED TEAM IN THE EAST");
-            addTextToTextboxQueue( "Bobcat: YEA OKAY SEE YOU ON THE ICE");
+            addTextToTextboxQueue( "Goopher: THIS IS GONNA BE CAKE ");
+            addTextToTextboxQueue( "Bobcat: Cake is what we'll celebrate with ");
+            addTextToTextboxQueue( "Goopher: MOST OVERRATED TEAM IN THE EAST ");
+            addTextToTextboxQueue( "Bobcat: YEA OKAY SEE YOU ON THE ICE ");
 
           //  addTextToTextboxQueue( "Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
         }

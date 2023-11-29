@@ -9,12 +9,12 @@ public class LostBallScript extends Script {
     protected void setup() {
         lockPlayer();
         showTextbox();
-        addTextToTextboxQueue("Welcome, I'm Coach if you need help with how to play press ___");
-        addTextToTextboxQueue("You are going to defeat the final four schools and get us that trophy");
-        addTextToTextboxQueue( "We are yet to get a championship and this is our year");
-        addTextToTextboxQueue( "It's all up to you, first gather some supplies then head into the rink with our first opponent");
-        addTextToTextboxQueue( "Merimack aka The Warrior");
-        addTextToTextboxQueue( "Goodluck, Do me proud.");
+        addTextToTextboxQueue("Welcome, I'm Coach if you need help \n with how to play go back to instructions. ");
+        addTextToTextboxQueue("You are going to defeat the final four schools !\nand get us that trophy. ");
+        addTextToTextboxQueue( "We are yet to get a championship !\n and this is our year. ");
+        addTextToTextboxQueue( "It's all up to you, first gather some  supplies !\nthen head into the rink with our first opponent. ");
+        addTextToTextboxQueue( "Merimack aka The Warrior. ");
+        addTextToTextboxQueue( "Goodluck, Do me proud. ");
        // addTextToTextboxQueue("Maybe Walrus has seen it.");
     }
 
