@@ -196,9 +196,10 @@ public class PlayLevelScreen extends Screen {
        // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
          //   playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         //}
-        if (hasBeatenWolverine == true && map.getFlagManager().isFlagSet("hasTalkedToWolverine"))
+        if (hasBeatenWolverine == true && map.getFlagManager().isFlagSet("hasTalkedToWolverine") && hasBeatenGopher == false && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && map.getFlagManager().isFlagSet("hasTalkedToGoopher"))
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE4_ACTIVATE;
+            System.out.println("Battle 4 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
@@ -208,19 +209,20 @@ public class PlayLevelScreen extends Screen {
                 hasBeatenGopher = true;
             }
         }
-     //   else if (hasBeatenBuckeye == true && map.getFlagManager().isFlagSet("hasTalkedToBuckeye"))
-       // {
-         //   playLevelScreenState = PlayLevelScreenState.BATTLE3_ACTIVATE;
-           // if(GamePanel.health <= 0) {
-            //    playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
-            //}
-            //if(GamePanel.bossHealth3 <= 0)
-            //{
-              //  playLevelScreenState = PlayLevelScreenState.RUNNING;
-                //hasBeatenWolverine = true;
-               // map.getFlagManager().setFlag("hasTalkedToWolverine");
-           // }
-       // }
+        else if (hasBeatenBuckeye == true && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && hasBeatenWarrior == true && map.getFlagManager().isFlagSet("hasTalkedToWolverine") && hasBeatenWolverine == false)
+        {
+            playLevelScreenState = PlayLevelScreenState.BATTLE3_ACTIVATE;
+            System.out.println("Battle 3 Activate");
+            if(GamePanel.health <= 0) {
+                playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
+            }
+            if(GamePanel.bossHealth3 <= 0)
+            {
+                playLevelScreenState = PlayLevelScreenState.RUNNING;
+                hasBeatenWolverine = true;
+                
+            }
+        }
         else if (hasBeatenBuckeye == false && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && map.getFlagManager().isFlagSet("hasTalkedToWarrior") && hasBeatenWarrior == true)
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE2_ACTIVATE;
@@ -232,7 +234,7 @@ public class PlayLevelScreen extends Screen {
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
                 hasBeatenBuckeye = true;
-                //map.getFlagManager().setFlag("hasTalkedToBuckeye");
+                
             }
         }
         else if (hasBeatenWarrior == false && map.getFlagManager().isFlagSet("hasTalkedToWarrior")){
@@ -245,7 +247,7 @@ public class PlayLevelScreen extends Screen {
             if(GamePanel.bossHealth <= 0){
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
                 hasBeatenWarrior = true;
-                //map.getFlagManager().setFlag("hasTalkedToWarrior");
+               
             }
         }
 
