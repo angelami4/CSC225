@@ -47,6 +47,12 @@ public class PlayLevelScreen extends Screen {
     Sound gameOver = new Sound("game-over.wav", false);
     Sound fightWin = new Sound("fight-win.wav", false);
     Sound warriorTaunt = new Sound("ganon-chuckle.wav", true);
+    Sound brutusMusic = new Sound("brutus-fight.wav", true);
+    Sound brutusTaunt = new Sound("brutus-laugh.wav", true);
+    Sound wolverineMusic = new Sound("wolverine-music.wav", true);
+    Sound wolverineTaunt = new Sound("wolverine-laugh.wav", true);
+    Sound gopherMusic = new Sound("gopher-fight.wav", true);
+    Sound gopherTaunt = new Sound("gopher-laugh.wav", true);
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -120,17 +126,10 @@ public class PlayLevelScreen extends Screen {
         }
         winScreen = new WinScreen(this);
         inventoryScreen = new InventoryScreen(this);
-
         loseScreen = new LoseScreen(this);
-
     }
-
-    
-
     public void update() {
         updatePauseState();
-
-
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
@@ -139,17 +138,23 @@ public class PlayLevelScreen extends Screen {
                 background.play();
                 warriorMusic.pause();
                 warriorTaunt.pause();
+                brutusMusic.pause();
+                brutusTaunt.pause();
+                wolverineMusic.pause();
+                wolverineTaunt.pause();
+                gopherMusic.pause();
+                gopherTaunt.pause();
                 map.update(player);
-                inventoryScreen.update();
+                //inventoryScreen.update();
                 if(isGamePaused){
                     playLevelScreenState = PlayLevelScreenState.INVENTORY;
                     keyLocker.lockKey(pauseKey);
                 }
                 
-                        if (map.mapTransition == 1) {
-            transitionToFinalMap();
-            map.mapTransition = 0;
-        }
+                if (map.mapTransition == 1) {
+                    transitionToFinalMap();
+                    map.mapTransition = 0;
+                }
 
                 break;
             // if level has been completed, bring up level cleared screen
@@ -158,6 +163,12 @@ public class PlayLevelScreen extends Screen {
                 background.pause();
                 warriorMusic.pause();
                 warriorTaunt.pause();
+                brutusMusic.pause();
+                brutusTaunt.pause();
+                wolverineMusic.pause();
+                wolverineTaunt.pause();
+                gopherMusic.pause();
+                gopherTaunt.pause();
                 gameOver.play();
                 break;
             case LEVEL_WIN:
@@ -165,6 +176,12 @@ public class PlayLevelScreen extends Screen {
                 background.pause();
                 warriorMusic.pause();
                 warriorTaunt.pause();
+                brutusMusic.pause();
+                brutusTaunt.pause();
+                wolverineMusic.pause();
+                wolverineTaunt.pause();
+                gopherMusic.pause();
+                gopherTaunt.pause();
                 fightWin.play();
                 break;
             case BATTLE_ACTIVATE:
@@ -177,15 +194,21 @@ public class PlayLevelScreen extends Screen {
             case BATTLE2_ACTIVATE:
                 battleScreen2.update();
                 background.pause();
-                //fightStart.play();
+                fightStart.play();
+                brutusMusic.play();
+                brutusTaunt.play();
                 break;
             case BATTLE3_ACTIVATE:
                 battleScreen3.update();
                 background.pause();
+                wolverineMusic.play();
+                wolverineTaunt.play();
                 break;
             case BATTLE4_ACTIVATE:
                 battleScreen4.update();
                 background.pause();
+                gopherMusic.play();
+                gopherTaunt.play();
                 break;
             case INVENTORY:
                 inventoryScreen.update();
@@ -200,7 +223,7 @@ public class PlayLevelScreen extends Screen {
         if (hasBeatenGopher == false && map.getFlagManager().isFlagSet("hasTalkedToGoofer")){
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE4_ACTIVATE;
-            System.out.println("Battle 4 Activate");
+            //System.out.println("Battle 4 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
@@ -215,7 +238,7 @@ public class PlayLevelScreen extends Screen {
         //(hasBeatenBuckeye == true && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && hasBeatenWarrior == true && map.getFlagManager().isFlagSet("hasTalkedToWolverine") && hasBeatenWolverine == false)
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE3_ACTIVATE;
-            System.out.println("Battle 3 Activate");
+            //System.out.println("Battle 3 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
@@ -230,7 +253,7 @@ public class PlayLevelScreen extends Screen {
         else if (hasBeatenBuckeye == false && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && map.getFlagManager().isFlagSet("hasTalkedToWarrior") && hasBeatenWarrior == true )
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE2_ACTIVATE;
-            System.out.println("Battle 2 Activate");
+            //System.out.println("Battle 2 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
@@ -242,10 +265,10 @@ public class PlayLevelScreen extends Screen {
             }
         }
         else if (hasBeatenWarrior == false && map.getFlagManager().isFlagSet("hasTalkedToWarrior")){
-              System.out.println("Battle 1 Activate");
+              //System.out.println("Battle 1 Activate");
             playLevelScreenState = PlayLevelScreenState.BATTLE_ACTIVATE;
               if (GamePanel.health <= 0 ) {
-              playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
+                playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
               //gameOver.play();
             } 
             if(GamePanel.bossHealth <= 0){
