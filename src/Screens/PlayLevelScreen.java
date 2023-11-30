@@ -226,7 +226,7 @@ public class PlayLevelScreen extends Screen {
             }
         }
     }
-        else if (hasBeatenBuckeye == false && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && map.getFlagManager().isFlagSet("hasTalkedToWarrior") && hasBeatenWarrior == true)
+        else if (hasBeatenBuckeye == false && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && map.getFlagManager().isFlagSet("hasTalkedToWarrior") && hasBeatenWarrior == true )
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE2_ACTIVATE;
             System.out.println("Battle 2 Activate");
