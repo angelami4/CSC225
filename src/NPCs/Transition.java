@@ -17,7 +17,7 @@ public class Transition extends NPC {
 
     public Transition(int id, Point location)
     {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("NationalTrophy.png"), 14, 17), "DEFAULT");
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("arrow.png"), 14, 17), "DEFAULT");
     }
 
     //add script
