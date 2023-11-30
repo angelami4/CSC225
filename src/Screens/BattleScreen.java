@@ -9,8 +9,11 @@ import Utils.Sound;
 //import Maps.TestMap;
 //import Game.GameState;
 import Combat.Battle;
+import Combat.BuckeyeMoves;
+import Combat.GopherMoves;
 import Combat.NextMove;
 import Combat.WarriorMoves;
+import Combat.WolverineMoves;
 
 import java.awt.*;
 import java.io.File;
@@ -22,7 +25,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 //import Engine.GamePanel;
 
-public class BattleScreen extends Screen {
+public class BattleScreen extends Screen 
+{
     protected SpriteFont playerHP;
     protected SpriteFont enemyHP;
     protected SpriteFont instructions;
@@ -121,7 +125,7 @@ public class BattleScreen extends Screen {
                     attackMessage.setText("Bobcat used HEAVY Attack!!!");
                     attackMessage.setX(200);
                     Battle.CatMove = NextMove.HEAVY;
-                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    Battle.Fight();
                     if (Battle.CatTakesDamage == true)
                     {
                         GamePanel.health -= 10;
@@ -137,7 +141,7 @@ public class BattleScreen extends Screen {
                     attackMessage.setText("Bobcat used LIGHT Attack!!!");
                     attackMessage.setX(200);
                     Battle.CatMove = NextMove.LIGHT;
-                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    Battle.Fight();
                     if (Battle.CatTakesDamage == true)
                     {
                         GamePanel.health -= 10;
@@ -153,7 +157,7 @@ public class BattleScreen extends Screen {
                     attackMessage.setText("Bobcat used DEFEND!!!");
                     attackMessage.setX(200);
                     Battle.CatMove = NextMove.DEFEND;
-                    Battle.Fight(WarriorMoves.WarriorHP, WarriorMoves.WarriorDamage);
+                    Battle.Fight();
                     if (Battle.CatTakesDamage == true)
                     {
                         GamePanel.health -= 10;

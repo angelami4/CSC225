@@ -1,9 +1,11 @@
 package Scripts.TestMap;
 
 import Level.*;
+import Utils.Sound;
 
 public class TrophyScript extends Script<Item>
 {
+    Sound pickup = new Sound("pickup-item.wav", false);
     @Override
     protected void setup() {
         if (!isFlagSet("hasTouchedTrophy")) {
@@ -16,6 +18,7 @@ public class TrophyScript extends Script<Item>
        if (isFlagSet("hasTouchedTrophy"))
        {
         entity.setIsHidden(true);
+        pickup.play();
        }
        System.out.println("test print");
     }
