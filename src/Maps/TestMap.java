@@ -6,7 +6,7 @@ import Level.Map;
 import Level.NPC;
 import Level.Item;
 import Level.Trigger;
-import NPCs.Dinosaur;
+//import NPCs.Dinosaur;
 import NPCs.Buckeye;
 import NPCs.Warrior;
 import NPCs.Buckeye;
@@ -17,7 +17,7 @@ import Items.*;
 import Scripts.TestMap.TrophyScript;
 import Scripts.TestMap.BuckeyeScript;
 import Scripts.SimpleTextScript;
-import Scripts.TestMap.DinoScript;
+//import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.SwitchMap;
 import Scripts.TestMap.TreeScript;
@@ -59,10 +59,10 @@ public class TestMap extends Map {
         buckeye.setInteractScript(new BuckeyeScript());
         npcs.add(buckeye);
 
-        Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
-        dinosaur.setExistenceFlag("hasTalkedToDinosaur");
-        dinosaur.setInteractScript(new DinoScript());
-        npcs.add(dinosaur);
+        //Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
+        //dinosaur.setExistenceFlag("hasTalkedToDinosaur");
+        //dinosaur.setInteractScript(new DinoScript());
+        //npcs.add(dinosaur);
         
         
         Transition transition = new Transition(2, getMapTile(14, 5).getLocation());
@@ -83,15 +83,15 @@ public class TestMap extends Map {
     {
         ArrayList<Item> items = new ArrayList<>();
 
-        Trophy trophy = new Trophy(1, getMapTile(13, 17).getLocation());
+        Trophy trophy = new Trophy(1, getMapTile(16, 2).getLocation());
         trophy.setInteractScript(new TrophyScript());
         items.add(trophy);
 
-        CTice ctice = new CTice(1, getMapTile(13,13).getLocation());
+        CTice ctice = new CTice(1, getMapTile(10,2).getLocation());
         ctice.setInteractScript(new TrophyScript());
         items.add(ctice);
 
-        FriendBell friendbell = new FriendBell(1, getMapTile(13, 9).getLocation());
+        FriendBell friendbell = new FriendBell(1, getMapTile(13, 2).getLocation());
         friendbell.setInteractScript(new TrophyScript());
         items.add(friendbell);
         
