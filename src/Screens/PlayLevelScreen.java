@@ -45,7 +45,7 @@ public class PlayLevelScreen extends Screen {
     Sound fightStart = new Sound("fight!.wav", false);
     Sound warriorMusic = new Sound("dummy!.wav", false);
     Sound gameOver = new Sound("game-over.wav", false);
-    Sound fightWin = new Sound("fight-win.wav", false);
+
     Sound warriorTaunt = new Sound("ganon-chuckle.wav", true);
     Sound brutusMusic = new Sound("brutus-fight.wav", true);
     Sound brutusTaunt = new Sound("brutus-laugh.wav", true);
@@ -183,7 +183,6 @@ public class PlayLevelScreen extends Screen {
                 wolverineTaunt.pause();
                 gopherMusic.pause();
                 gopherTaunt.pause();
-                fightWin.play();
                 victoryRoyale.play();
                 break;
             case BATTLE_ACTIVATE:
@@ -255,7 +254,6 @@ public class PlayLevelScreen extends Screen {
         else if (hasBeatenBuckeye == false && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && map.getFlagManager().isFlagSet("hasTalkedToWarrior") && hasBeatenWarrior == true )
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE2_ACTIVATE;
-            System.out.println("Battle 2 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
