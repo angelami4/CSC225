@@ -41,6 +41,7 @@ public class InventoryScreen extends Screen {
 	protected boolean isItemHovered;
     protected int menuItemSelected = -1;
 	protected int keyPressTimer;
+	public static int trophyCounter;
 	Sound interact = new Sound("interact.wav", false);
 
     public InventoryScreen(PlayLevelScreen playLevelScreen) {
@@ -60,7 +61,7 @@ public class InventoryScreen extends Screen {
 		dmgBoost3 = new SpriteFont("- Scratching Post", 30, 380, "Trebuchet MS", 20, Color.white);
 
 		itemTitle = new SpriteFont("ITEMS", 220, 65, "Verdana", 24, Color.white);
-		item0 = new SpriteFont("", 220, 95, "Trebuchet MS", 24, Color.black);
+		item0 = new SpriteFont("", 220, 185, "Trebuchet MS", 24, Color.white);
 		item1 = new SpriteFont(" - Pepsi (5 HP)", 220, 95, "Trebuchet MS", 24, Color.white);
 		item2 = new SpriteFont(" - Hot Dog (10 HP)", 220, 125, "Trebuchet MS", 24, Color.white);
 		item3 = new SpriteFont(" - Nachos (20 HP)", 220, 155, "Trebuchet MS", 24, Color.white);
@@ -168,12 +169,20 @@ public class InventoryScreen extends Screen {
 		}
 		if(subMenuItemHovered == 0){
 			itemLabel.setColor(Color.YELLOW);
+			item1.setText(" - Pepsi (5 HP)");
+			item2.setText(" - Hot Dog (10 HP)");
+			item3.setText(" - Nachos (20 HP)");
+			item0.setText("");
 		}
 		if(subMenuItemHovered == 1){
 			item1.setColor(Color.white);
             item2.setColor(Color.white);
 			item3.setColor(Color.white);
-			itemLabel.setColor(Color.RED);
+			trophyLabel.setColor(Color.RED);
+			item1.setText("CT Ice Trophy");
+			item2.setText("Friend Bell Trophy");
+			item3.setText("Trophy");
+			item0.setText("[WINNING TROPHY]");
 		}
 		if(subMenuItemHovered == 2){
 			itemLabel.setColor(Color.WHITE);

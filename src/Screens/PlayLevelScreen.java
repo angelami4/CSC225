@@ -134,6 +134,7 @@ public class PlayLevelScreen extends Screen {
                 warriorMusic.pause();
                 warriorTaunt.pause();
                 map.update(player);
+                inventoryScreen.update();
                 if(isGamePaused){
                     playLevelScreenState = PlayLevelScreenState.INVENTORY;
                     keyLocker.lockKey(pauseKey);
@@ -192,6 +193,7 @@ public class PlayLevelScreen extends Screen {
             if(GamePanel.bossHealth4 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
+                inventoryScreen.update();
                 //hasBeatenGopher = true;
             }
         }
@@ -204,6 +206,7 @@ public class PlayLevelScreen extends Screen {
             if(GamePanel.bossHealth3 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
+                inventoryScreen.update();
                 //hasBeatenWolverine = true;
                 //map.getFlagManager().setFlag("hasTalkedToGoofer");
             }
@@ -217,6 +220,7 @@ public class PlayLevelScreen extends Screen {
             if(GamePanel.bossHealth2 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
+                inventoryScreen.update();
                 //hasBeatenBuckeye = true;
                 //map.getFlagManager().setFlag("hasTalkedToWolverine");
             }
@@ -229,6 +233,7 @@ public class PlayLevelScreen extends Screen {
             } 
             if(GamePanel.bossHealth <= 0){
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
+                inventoryScreen.update();
                 //map.getFlagManager().setFlag("hasTalkedToBuckeye");
             }
         }

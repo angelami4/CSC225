@@ -4,6 +4,7 @@ import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
 import Utils.Sound;
+import Screens.InventoryScreen;
 
 import javax.swing.*;
 
@@ -46,7 +47,7 @@ public class GamePanel extends JPanel {
 	// The JPanel and various important class instances are setup here
 	public GamePanel(){
 		super();
-		health = 60;
+		health = 100;
 		bossHealth = 90;
 		bossHealth2 = 110;
 		bossHealth3 = 130;
