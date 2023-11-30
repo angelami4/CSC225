@@ -192,36 +192,38 @@ public class PlayLevelScreen extends Screen {
             if(GamePanel.bossHealth4 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                //hasBeatenGopher = true;
+                hasBeatenGopher = true;
             }
         }
-        else if (hasBeatenBuckeye == true && map.getFlagManager().isFlagSet("hasTalkedToBuckeye"))
-        {
-            playLevelScreenState = PlayLevelScreenState.BATTLE3_ACTIVATE;
-            if(GamePanel.health <= 0) {
-                playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
-            }
-            if(GamePanel.bossHealth3 <= 0)
-            {
-                playLevelScreenState = PlayLevelScreenState.RUNNING;
+     //   else if (hasBeatenBuckeye == true && map.getFlagManager().isFlagSet("hasTalkedToBuckeye"))
+       // {
+         //   playLevelScreenState = PlayLevelScreenState.BATTLE3_ACTIVATE;
+           // if(GamePanel.health <= 0) {
+            //    playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
+            //}
+            //if(GamePanel.bossHealth3 <= 0)
+            //{
+              //  playLevelScreenState = PlayLevelScreenState.RUNNING;
                 //hasBeatenWolverine = true;
-                //map.getFlagManager().setFlag("hasTalkedToGoofer");
-            }
-        }
-        else if (hasBeatenWarrior == true && map.getFlagManager().isFlagSet("hasTalkedToWarrior"))
+               // map.getFlagManager().setFlag("hasTalkedToWolverine");
+           // }
+       // }
+        else if (hasBeatenBuckeye == false && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && map.getFlagManager().isFlagSet("hasTalkedToWarrior") && hasBeatenWarrior == true)
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE2_ACTIVATE;
+            System.out.println("Battle 2 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
             if(GamePanel.bossHealth2 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                //hasBeatenBuckeye = true;
-                //map.getFlagManager().setFlag("hasTalkedToWolverine");
+                hasBeatenBuckeye = true;
+                //map.getFlagManager().setFlag("hasTalkedToBuckeye");
             }
         }
-        else if (map.getFlagManager().isFlagSet("hasTalkedToWalrus")) {
+        else if (hasBeatenWarrior == false && map.getFlagManager().isFlagSet("hasTalkedToWarrior")){
+              System.out.println("Battle 1 Activate");
             playLevelScreenState = PlayLevelScreenState.BATTLE_ACTIVATE;
               if (GamePanel.health <= 0 ) {
               playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
@@ -229,26 +231,27 @@ public class PlayLevelScreen extends Screen {
             } 
             if(GamePanel.bossHealth <= 0){
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                //map.getFlagManager().setFlag("hasTalkedToBuckeye");
+                hasBeatenWarrior = true;
+                //map.getFlagManager().setFlag("hasTalkedToWarrior");
             }
         }
 
-        if (GamePanel.bossHealth <= 0)
-        {
-            hasBeatenWarrior = true;
-        }
-        else if(GamePanel.bossHealth2 <= 0)
-        {
-            hasBeatenBuckeye = true;
-        }
-        else if(GamePanel.bossHealth3 <= 0)
-        {
-            hasBeatenWolverine = true;
-        }
-        else if(GamePanel.bossHealth4 <= 0)
-        {
-            hasBeatenGopher = true;
-        }
+       // if (GamePanel.bossHealth <= 0)
+        //{
+           // hasBeatenWarrior = true;
+        //}
+        //else if(GamePanel.bossHealth2 <= 0)
+        //{
+         //   hasBeatenBuckeye = true;
+        //}
+        //else if(GamePanel.bossHealth3 <= 0)
+        //{
+         //   hasBeatenWolverine = true;
+        //}
+        //else if(GamePanel.bossHealth4 <= 0)
+        //{
+         //   hasBeatenGopher = true;
+        //}
     }
 
     public void draw(GraphicsHandler graphicsHandler) {

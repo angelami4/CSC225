@@ -28,9 +28,8 @@ public class WarriorScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-
         // set flag so that if walrus is talked to again after the first time, what he says changes
-        //setFlag("hasTalkedToWalrus");
+        setFlag("hasTalkedToWarrior");
     }
 
     @Override

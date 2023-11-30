@@ -8,6 +8,7 @@ import Level.Item;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Buckeye;
+import NPCs.Warrior;
 import NPCs.Buckeye;
 import NPCs.Walrus;
 //import NPCs.TrophyNPC;
@@ -18,6 +19,7 @@ import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.TreeScript;
+import Scripts.TestMap.WarriorScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
 import Utils.Sound;
@@ -46,9 +48,9 @@ public class TestMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        Walrus walrus = new Walrus(1, getMapTile(4, 20).getLocation().subtractY(40));
-        walrus.setInteractScript(new WalrusScript());
-        npcs.add(walrus);
+        Warrior warrior = new Warrior(1, getMapTile(4, 20).getLocation().subtractY(40));
+        warrior.setInteractScript(new WarriorScript());
+        npcs.add(warrior);
 
 
         Buckeye buckeye = new Buckeye(1, getMapTile(10, 20).getLocation().subtractY(40));
