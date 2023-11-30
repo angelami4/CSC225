@@ -7,6 +7,13 @@ import Utils.Sound;
 import Maps.TestMap;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 // This class is for the win level screen
 public class WinScreen extends Screen {
@@ -20,23 +27,29 @@ public class WinScreen extends Screen {
     protected PlayLevelScreen playLevelScreen;
     protected Rectangle rectangle;
     protected GraphicsHandler graphicsHandler;
+    protected BufferedImage victoryImage; 
 
     public WinScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
         initialize();
+        try {
+            victoryImage = ImageIO.read(new File("Resources/victoryroyale.jpg")); 
+           
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    
+    
     @Override
     public void initialize() {
        
-       loseMessage = new SpriteFont("YOU WIN! WE ARE CHAMPS! ", 50, 200, "Verdana", 30, new Color(255, 255, 255));
+       loseMessage = new SpriteFont("PRESS ESC FOR MENU ", 200, 500, "Verdana", 30, new Color(255, 0, 0));
        loseMessage.setOutlineColor(Color.black);
        loseMessage.setOutlineThickness(3);
   
-       loseMessage2 = new SpriteFont("YOU WIN! WE ARE CHAMPS! ", 50, 204, "Verdana", 30, new Color(255, 255, 255));
-       loseMessage2.setOutlineColor(Color.black);
-       loseMessage2.setOutlineThickness(3);
-        
+       
        keyLocker.lockKey(Key.SPACE);
 
         
@@ -61,7 +74,9 @@ public class WinScreen extends Screen {
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
-    
+        if (victoryImage != null) {
+            graphicsHandler.drawImage(victoryImage, 0, 0);
+        }
         loseMessage.draw(graphicsHandler);
        // poopMessage.draw(graphicsHandler);
  

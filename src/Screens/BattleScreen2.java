@@ -209,7 +209,7 @@ public class BattleScreen2 extends Screen
         }
 
         graphicsHandler.drawFilledRectangle(0, 420, 450, 160, Color.white);
-        graphicsHandler.drawFilledRectangle(500, 420, 400, 160, Color.white);
+        
         playerHP.draw(graphicsHandler);
         enemyHP.draw(graphicsHandler);
 
