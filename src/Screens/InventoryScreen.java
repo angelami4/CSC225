@@ -155,39 +155,6 @@ public class InventoryScreen extends Screen {
 		if(keyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyUp(Key.ENTER)){
 			keyLocker.unlockKey(Key.ENTER);
 		}
-		if(Keyboard.isKeyDown(Key.LEFT) && keyPressTimer == 0) {
-			keyPressTimer = 14;
-			subMenuItemHovered++;
-		}
-		if(Keyboard.isKeyDown(Key.RIGHT) && keyPressTimer == 0){
-			keyPressTimer = 14;
-			subMenuItemHovered--;
-		}
-		if(Keyboard.isKeyDown(Key.DOWN) && keyPressTimer == 0){
-			keyPressTimer = 14;
-			subMenuItemHovered++;
-		}
-		if(subMenuItemHovered == 0){
-			itemLabel.setColor(Color.YELLOW);
-			item1.setText(" - Pepsi (5 HP)");
-			item2.setText(" - Hot Dog (10 HP)");
-			item3.setText(" - Nachos (20 HP)");
-			item0.setText("");
-		}
-		if(subMenuItemHovered == 1){
-			item1.setColor(Color.white);
-            item2.setColor(Color.white);
-			item3.setColor(Color.white);
-			trophyLabel.setColor(Color.RED);
-			item1.setText("CT Ice Trophy");
-			item2.setText("Friend Bell Trophy");
-			item3.setText("Trophy");
-			item0.setText("[WINNING TROPHY]");
-		}
-		if(subMenuItemHovered == 2){
-			itemLabel.setColor(Color.WHITE);
-			trophyLabel.setColor(Color.RED);
-		}
 	}
     
     @Override
