@@ -28,12 +28,12 @@ public class FinalMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        Gopher gopher = new Gopher(1, getMapTile(4, 20).getLocation().subtractY(40));
+        Gopher gopher = new Gopher(1, getMapTile(11, 29).getLocation().subtractY(40));
         gopher.setInteractScript(new GooferScript());
         npcs.add(gopher);
 
 
-       Wolverine wolverine = new Wolverine(1, getMapTile(10, 20).getLocation().subtractY(40));
+       Wolverine wolverine = new Wolverine(1, getMapTile(15, 8).getLocation().subtractY(40));
         wolverine.setInteractScript(new WolverineScript());
         npcs.add(wolverine);
 
