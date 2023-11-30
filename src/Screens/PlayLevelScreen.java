@@ -231,7 +231,7 @@ public class PlayLevelScreen extends Screen {
             }
             if(GamePanel.bossHealth4 <= 0)
             {
-                playLevelScreenState = PlayLevelScreenState.RUNNING;
+                playLevelScreenState = PlayLevelScreenState.LEVEL_WIN;
                 hasBeatenGopher = true;
             }
         }
@@ -277,6 +277,7 @@ public class PlayLevelScreen extends Screen {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
                 hasBeatenWarrior = true;
                 //map.getFlagManager().setFlag("hasTalkedToBuckeye");
+
             }
         }
 
