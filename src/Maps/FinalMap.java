@@ -7,7 +7,7 @@ import Level.NPC;
 import NPCs.Buckeye;
 import NPCs.Dinosaur;
 import NPCs.Transition;
-//import NPCs.Wolverine;
+import NPCs.Wolverine;
 import NPCs.Gopher;
 import NPCs.Warrior;
 import Scripts.TestMap.BuckeyeScript;
@@ -24,7 +24,7 @@ public class FinalMap extends Map {
         super("my_map.txt", new CommonTileset());
         this.playerStartPosition = new Point(1, 11);
     }
-      @Override
+    @Override
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
@@ -33,9 +33,9 @@ public class FinalMap extends Map {
         npcs.add(gopher);
 
 
-       // Wolverine wolverine = new Wolverine(1, getMapTile(10, 20).getLocation().subtractY(40));
-        //wolverine.setInteractScript(new WolverineScript());
-        //npcs.add(wolverine);
+       Wolverine wolverine = new Wolverine(1, getMapTile(10, 20).getLocation().subtractY(40));
+        wolverine.setInteractScript(new WolverineScript());
+        npcs.add(wolverine);
 
       
         return npcs;
