@@ -59,8 +59,8 @@ public class BattleScreen2 extends Screen
         initialize();
         try {
             backgroundImage = ImageIO.read(new File("Resources/rink.png")); 
-            playerImage = ImageIO.read(new File("Resources/b0bcat.png")); 
-            enemyImage = ImageIO.read(new File("Resources/b2.png")); 
+            playerImage = ImageIO.read(new File("Resources/bb1.png")); 
+            enemyImage = ImageIO.read(new File("Resources/bb3.png")); 
         } catch (IOException e) {
             e.printStackTrace();
         }
