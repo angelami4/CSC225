@@ -14,7 +14,7 @@ public class BuckeyeScript extends Script<NPC> {
         showTextbox();
 
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
-        if (!isFlagSet("hasTalkedToWarrior")) {
+        if (isFlagSet("hasTalkedToWarrior")) {
             addTextToTextboxQueue( "Buckeye: YOU THINK THIS GON BE EASY? ");
             addTextToTextboxQueue( "Buckeye: Just Cause im from Ohio? ");
             addTextToTextboxQueue( "Buckeye: Well you thought wrong! ");
@@ -32,10 +32,10 @@ public class BuckeyeScript extends Script<NPC> {
 
     @Override
     protected void cleanup() {
-        map.getFlagManager().setFlag("hasTalkedToWarrior");
+        //map.getFlagManager().setFlag("hasTalkedToWarrior");
         unlockPlayer();
         hideTextbox();
-
+        setFlag("hasTalkedToBuckeye");
         // set flag so that if walrus is talked to again after the first time, what he says changes
       //  setFlag("hasTalkedToBuckeye");
     }

@@ -10,6 +10,7 @@ import Game.Game;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
+import Maps.FinalMap;
 import Maps.TestMap;
 import Players.Cat;
 import Utils.Direction;
@@ -121,10 +122,15 @@ public class PlayLevelScreen extends Screen {
         inventoryScreen = new InventoryScreen(this);
 
         loseScreen = new LoseScreen(this);
+
     }
+
+    
 
     public void update() {
         updatePauseState();
+
+
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
@@ -139,6 +145,12 @@ public class PlayLevelScreen extends Screen {
                     playLevelScreenState = PlayLevelScreenState.INVENTORY;
                     keyLocker.lockKey(pauseKey);
                 }
+                
+                        if (map.mapTransition == 1) {
+            transitionToFinalMap();
+            map.mapTransition = 0;
+        }
+
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_LOSE:
@@ -180,52 +192,57 @@ public class PlayLevelScreen extends Screen {
                 break;
         }
         
+
         // if flag is set at any point during gameplay, game is "won"
        // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
          //   playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         //}
-        if (hasBeatenWolverine == true && map.getFlagManager().isFlagSet("hasTalkedToWolverine"))
+        if (hasBeatenGopher == false && map.getFlagManager().isFlagSet("hasTalkedToGoofer")){
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE4_ACTIVATE;
+            System.out.println("Battle 4 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
             if(GamePanel.bossHealth4 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                inventoryScreen.update();
-                //hasBeatenGopher = true;
+                hasBeatenGopher = true;
             }
         }
-        else if (hasBeatenBuckeye == true && map.getFlagManager().isFlagSet("hasTalkedToBuckeye"))
+    }
+            else if (hasBeatenWolverine == false && map.getFlagManager().isFlagSet("hasTalkedToWolverine")){
+        //(hasBeatenBuckeye == true && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && hasBeatenWarrior == true && map.getFlagManager().isFlagSet("hasTalkedToWolverine") && hasBeatenWolverine == false)
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE3_ACTIVATE;
+            System.out.println("Battle 3 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
             if(GamePanel.bossHealth3 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                inventoryScreen.update();
                 //hasBeatenWolverine = true;
                 //map.getFlagManager().setFlag("hasTalkedToGoofer");
             }
         }
-        else if (hasBeatenWarrior == true && map.getFlagManager().isFlagSet("hasTalkedToWarrior"))
+    }
+        else if (hasBeatenBuckeye == false && map.getFlagManager().isFlagSet("hasTalkedToBuckeye") && map.getFlagManager().isFlagSet("hasTalkedToWarrior") && hasBeatenWarrior == true )
         {
             playLevelScreenState = PlayLevelScreenState.BATTLE2_ACTIVATE;
+            System.out.println("Battle 2 Activate");
             if(GamePanel.health <= 0) {
                 playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
             }
             if(GamePanel.bossHealth2 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                inventoryScreen.update();
                 //hasBeatenBuckeye = true;
                 //map.getFlagManager().setFlag("hasTalkedToWolverine");
             }
         }
-        else if (map.getFlagManager().isFlagSet("hasTalkedToWalrus")) {
+        else if (hasBeatenWarrior == false && map.getFlagManager().isFlagSet("hasTalkedToWarrior")){
+              System.out.println("Battle 1 Activate");
             playLevelScreenState = PlayLevelScreenState.BATTLE_ACTIVATE;
               if (GamePanel.health <= 0 ) {
               playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
@@ -233,27 +250,26 @@ public class PlayLevelScreen extends Screen {
             } 
             if(GamePanel.bossHealth <= 0){
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                inventoryScreen.update();
                 //map.getFlagManager().setFlag("hasTalkedToBuckeye");
             }
         }
 
-        if (GamePanel.bossHealth <= 0)
-        {
-            hasBeatenWarrior = true;
-        }
-        else if(GamePanel.bossHealth2 <= 0)
-        {
-            hasBeatenBuckeye = true;
-        }
-        else if(GamePanel.bossHealth3 <= 0)
-        {
-            hasBeatenWolverine = true;
-        }
-        else if(GamePanel.bossHealth4 <= 0)
-        {
-            hasBeatenGopher = true;
-        }
+       // if (GamePanel.bossHealth <= 0)
+        //{
+           // hasBeatenWarrior = true;
+        //}
+        //else if(GamePanel.bossHealth2 <= 0)
+        //{
+         //   hasBeatenBuckeye = true;
+        //}
+        //else if(GamePanel.bossHealth3 <= 0)
+        //{
+         //   hasBeatenWolverine = true;
+        //}
+        //else if(GamePanel.bossHealth4 <= 0)
+        //{
+         //   hasBeatenGopher = true;
+        //}
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -303,20 +319,77 @@ public class PlayLevelScreen extends Screen {
     }
 
     private void updatePauseState() {
-		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
-			isGamePaused = !isGamePaused;
-			keyLocker.lockKey(pauseKey);
-			Sound pause = new Sound("pause.wav", false);
-			pause.playOnce();
-		}
+        if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
+            isGamePaused = !isGamePaused;
+            keyLocker.lockKey(pauseKey);
+            Sound pause = new Sound("pause.wav", false);
+            pause.playOnce();
+        }
 
-		if (Keyboard.isKeyUp(pauseKey)) {
-			keyLocker.unlockKey(pauseKey);
-		}
-	}
+        if (Keyboard.isKeyUp(pauseKey)) {
+            keyLocker.unlockKey(pauseKey);
+        }
+    }
 
     // This enum represents the different states this screen can be in
     public enum PlayLevelScreenState {
         RUNNING, LEVEL_LOSE, BATTLE_ACTIVATE, BATTLE2_ACTIVATE, BATTLE3_ACTIVATE, BATTLE4_ACTIVATE, INVENTORY, LEVEL_WIN
+    
+    }
+
+    private void transitionToFinalMap(){
+
+        this.map = new FinalMap();
+        map.setFlagManager(flagManager);
+
+        // setup player
+        this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+        this.player.setMap(map);
+        Point playerStartPosition = map.getPlayerStartPosition();
+        this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+        this.playLevelScreenState = PlayLevelScreenState.RUNNING;
+        this.player.setFacingDirection(Direction.LEFT);
+        
+        // let pieces of map know which button to listen for as the "interact" button
+        map.getTextbox().setInteractKey(player.getInteractKey());
+
+        // setup map scripts to have references to the map and player
+        for (MapTile mapTile : map.getMapTiles()) {
+            if (mapTile.getInteractScript() != null) {
+                mapTile.getInteractScript().setMap(map);
+                mapTile.getInteractScript().setPlayer(player);
+            }
+        }
+        for (NPC npc : map.getNPCs()) {
+            if (npc.getInteractScript() != null) {
+                npc.getInteractScript().setMap(map);
+                npc.getInteractScript().setPlayer(player);
+            }
+        }
+        for (Item item : map.getItems())
+        {
+            if (item.getInteractScript() != null)
+            {
+                item.getInteractScript().setMap(map);
+                item.getInteractScript().setPlayer(player);
+            }
+        }
+        for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
+            if (enhancedMapTile.getInteractScript() != null) {
+                enhancedMapTile.getInteractScript().setMap(map);
+                enhancedMapTile.getInteractScript().setPlayer(player);
+            }
+        }
+        for (Trigger trigger : map.getTriggers()) {
+            if (trigger.getTriggerScript() != null) {
+                trigger.getTriggerScript().setMap(map);
+                trigger.getTriggerScript().setPlayer(player);
+            }
+        }
+        winScreen = new WinScreen(this);
+        inventoryScreen = new InventoryScreen(this);
+
+        loseScreen = new LoseScreen(this);
+        this.playLevelScreenState = PlayLevelScreenState.RUNNING;
     }
 }

@@ -6,18 +6,22 @@ import Level.Map;
 import Level.NPC;
 import Level.Item;
 import Level.Trigger;
-import NPCs.Dinosaur;
+//import NPCs.Dinosaur;
 import NPCs.Buckeye;
+import NPCs.Warrior;
 import NPCs.Buckeye;
 import NPCs.Walrus;
+import NPCs.Transition;
 //import NPCs.TrophyNPC;
 import Items.*;
 import Scripts.TestMap.TrophyScript;
 import Scripts.TestMap.BuckeyeScript;
 import Scripts.SimpleTextScript;
-import Scripts.TestMap.DinoScript;
+//import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
+import Scripts.TestMap.SwitchMap;
 import Scripts.TestMap.TreeScript;
+import Scripts.TestMap.WarriorScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
 import Utils.Sound;
@@ -46,19 +50,25 @@ public class TestMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        Walrus walrus = new Walrus(1, getMapTile(4, 20).getLocation().subtractY(40));
-        walrus.setInteractScript(new WalrusScript());
-        npcs.add(walrus);
+        Warrior warrior = new Warrior(1, getMapTile(10, 20).getLocation().subtractY(40));
+        warrior.setInteractScript(new WarriorScript());
+        npcs.add(warrior);
 
 
-        Buckeye buckeye = new Buckeye(1, getMapTile(10, 20).getLocation().subtractY(40));
+        Buckeye buckeye = new Buckeye(1, getMapTile(4, 20).getLocation().subtractY(40));
         buckeye.setInteractScript(new BuckeyeScript());
         npcs.add(buckeye);
 
-        Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
-        dinosaur.setExistenceFlag("hasTalkedToDinosaur");
-        dinosaur.setInteractScript(new DinoScript());
-        npcs.add(dinosaur);
+        //Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
+        //dinosaur.setExistenceFlag("hasTalkedToDinosaur");
+        //dinosaur.setInteractScript(new DinoScript());
+        //npcs.add(dinosaur);
+        
+        
+        Transition transition = new Transition(2, getMapTile(14, 5).getLocation());
+        transition.setExistenceFlag("transitionToFinalMap");
+        transition.setInteractScript(new SwitchMap());
+        npcs.add(transition); 
 
         //TrophyNPC trophynpc = new TrophyNPC(1, getMapTile(13, 17).getLocation());
         //trophynpc.setExistenceFlag("hasTouchedTrophy");
@@ -73,15 +83,15 @@ public class TestMap extends Map {
     {
         ArrayList<Item> items = new ArrayList<>();
 
-        Trophy trophy = new Trophy(1, getMapTile(13, 17).getLocation());
+        Trophy trophy = new Trophy(1, getMapTile(16, 2).getLocation());
         trophy.setInteractScript(new TrophyScript());
         items.add(trophy);
 
-        CTice ctice = new CTice(1, getMapTile(13,13).getLocation());
+        CTice ctice = new CTice(1, getMapTile(10,2).getLocation());
         ctice.setInteractScript(new TrophyScript());
         items.add(ctice);
 
-        FriendBell friendbell = new FriendBell(1, getMapTile(13, 9).getLocation());
+        FriendBell friendbell = new FriendBell(1, getMapTile(13, 2).getLocation());
         friendbell.setInteractScript(new TrophyScript());
         items.add(friendbell);
         

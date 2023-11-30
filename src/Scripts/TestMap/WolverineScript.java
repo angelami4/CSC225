@@ -32,7 +32,7 @@ public class WolverineScript extends Script<NPC> {
         hideTextbox();
 
         // set flag so that if walrus is talked to again after the first time, what he says changes
-        //setFlag("hasTalkedToBuckeye");
+        setFlag("hasTalkedToWolverine");
     }
 
     @Override
