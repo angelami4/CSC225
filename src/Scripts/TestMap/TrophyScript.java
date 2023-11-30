@@ -20,7 +20,7 @@ public class TrophyScript extends Script<Item>
         entity.setIsHidden(true);
         pickup.play();
        }
-       System.out.println("test print");
+       
     }
 
     @Override

@@ -206,7 +206,7 @@ public class PlayLevelScreen extends Screen {
             }
             if(GamePanel.bossHealth4 <= 0)
             {
-                playLevelScreenState = PlayLevelScreenState.RUNNING;
+                playLevelScreenState = PlayLevelScreenState.LEVEL_WIN;
                 hasBeatenGopher = true;
             }
         }
@@ -222,7 +222,7 @@ public class PlayLevelScreen extends Screen {
             if(GamePanel.bossHealth3 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                //hasBeatenWolverine = true;
+                hasBeatenWolverine = true;
                 //map.getFlagManager().setFlag("hasTalkedToGoofer");
             }
         }
@@ -237,7 +237,7 @@ public class PlayLevelScreen extends Screen {
             if(GamePanel.bossHealth2 <= 0)
             {
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
-                //hasBeatenBuckeye = true;
+                hasBeatenBuckeye = true;
                 //map.getFlagManager().setFlag("hasTalkedToWolverine");
             }
         }
@@ -250,7 +250,9 @@ public class PlayLevelScreen extends Screen {
             } 
             if(GamePanel.bossHealth <= 0){
                 playLevelScreenState = PlayLevelScreenState.RUNNING;
+                hasBeatenWarrior = true;
                 //map.getFlagManager().setFlag("hasTalkedToBuckeye");
+
             }
         }
 
