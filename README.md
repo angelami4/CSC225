@@ -21,7 +21,7 @@ It can be accessed at [https://a-r-t.github.io/SER-225-Game-RPG/](https://a-r-t.
 Changes to content in the `docs` folder will not show up on the website unless they are pushed to the `master` branch.
 
 ## Credits
-**Cole Davignon**
-**Aidan Armellino**
-**Angela Bruno**
+**Cole Davignon,** 
+**Aidan Armellino,** 
+**Angela Bruno,** 
 **Javi Flores**
